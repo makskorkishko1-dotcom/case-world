@@ -222,15 +222,21 @@
     $('result').classList.remove('show');$('reelWrap').classList.add('show');
     const reel=$('reel');reel.style.transition='none';reel.style.transform='translateX(0)';
     const winner=pick(c.prizes);
-    const sequence=Array.from({length:27},()=>c.prizes[Math.floor(Math.random()*c.prizes.length)]);
-    sequence.push(winner);
+    // Put the winning item well before the end so the reel never stops on blank space.
+    const before=Array.from({length:32},()=>c.prizes[Math.floor(Math.random()*c.prizes.length)]);
+    const after=Array.from({length:6},()=>c.prizes[Math.floor(Math.random()*c.prizes.length)]);
+    const sequence=[...before,winner,...after];
     reel.innerHTML=sequence.map(p=>`<div class="reel-card ${p.rarity}"><div class="emoji">${p.emoji}</div><div>${escapeHtml(p.name)}</div></div>`).join('');
-    const cardWidth=112, targetIndex=sequence.length-1;
-    const targetX=targetIndex*cardWidth - (reel.parentElement.clientWidth/2) + cardWidth/2;
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+    // Measure the actual rendered card dimensions; do not assume a fixed card width.
+    const wrap=reel.parentElement;
+    const winnerCard=reel.children[before.length];
+    const cardRect=winnerCard.getBoundingClientRect();
+    const reelRect=reel.getBoundingClientRect();
+    const targetX=(cardRect.left-reelRect.left)+(cardRect.width/2)-(wrap.clientWidth/2);
     reel.style.transition='transform 4.1s cubic-bezier(.08,.72,.12,1)';
     reel.style.transform=`translateX(${-Math.max(0,targetX)}px)`;
-    await new Promise(r=>setTimeout(r,4250));
+    await new Promise(r=>setTimeout(r,4300));
     if(winner.kind==='stars')state.balance+=winner.value;
     else {
       const name=winner.value;
