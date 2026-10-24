@@ -30,6 +30,14 @@
     .case.red { border-color:#653940;background:linear-gradient(160deg,#482b32,#282329); }
     .case.blue { border-color:#345575;background:linear-gradient(160deg,#273e54,#22262e); }
     .case.hydra { border-color:#6b5730;background:linear-gradient(160deg,#4a3a24,#28252a); }
+    .case.dragon { border-color:#386b72;background:linear-gradient(160deg,#24464b,#22262e); }
+    .case.snake { border-color:#46734b;background:linear-gradient(160deg,#263f2b,#22262e); }
+    .case-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .case-card {background:#22242b;border:1px solid #393c46;border-radius:15px;padding:11px;min-width:0}
+    .case-card-head {display:flex;align-items:center;gap:8px;margin-bottom:8px}.case-card-icon{font-size:27px}.case-card-title{font-weight:900;font-size:13px}.case-card-price{font-size:11px;color:var(--gold);font-weight:800}
+    .drop-row{display:flex;align-items:center;gap:7px;padding:5px 0;border-top:1px solid #ffffff0d;font-size:11px}.drop-icon{width:25px;height:25px;display:grid;place-items:center;flex-shrink:0;border-radius:7px;background:#343640;font-size:16px}.drop-name{flex:1;min-width:0}.drop-chance{color:#f4d06c;font-weight:850;white-space:nowrap}
+    .catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.catalog-item{background:#2b2d35;border:1px solid #3c3f49;border-radius:12px;padding:10px 5px;text-align:center;min-width:0}.catalog-item .drop-icon{margin:0 auto 5px;width:42px;height:42px;font-size:25px}.catalog-name{font-size:11px;font-weight:750;overflow-wrap:anywhere}.catalog-note{font-size:10px;color:var(--muted);margin-top:3px}
+    .case-free-note{font-size:10px;color:#9da0ab;margin-top:7px;line-height:1.4}
     .case-icon { font-size:35px;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 8px #0005); }
     .case-name { display:block;font-size:12px;font-weight:850; }
     .price { display:block;color:var(--gold);font-size:12px;font-weight:800;margin-top:5px; }
@@ -59,7 +67,7 @@
     .item-list {display:grid;gap:8px;margin-top:12px}
     .item {display:flex;align-items:center;gap:11px;background:#2b2d35;border:1px solid #3c3f49;border-radius:13px;padding:11px}
     .item-emoji {width:45px;height:45px;display:grid;place-items:center;border-radius:12px;background:#383a44;font-size:25px;flex-shrink:0}
-    .item-info {flex:1;min-width:0}.item-name{font-weight:800}.item-meta{font-size:11px;color:var(--muted);margin-top:3px}
+    .item-info {flex:1;min-width:0}.item-name{font-weight:800}.item-meta{font-size:11px;color:var(--muted);margin-top:3px}.sell-btn{background:#3a3322;border:1px solid #66542b;color:#ffda78;border-radius:9px;padding:8px 9px;font-size:11px;font-weight:850;white-space:nowrap}
     .rarity {font-size:10px;font-weight:900;padding:4px 7px;border-radius:999px;background:#3b3d45;color:#c5c8d0}
     .rarity.rare{background:#233c50;color:#80caff}.rarity.epic{background:#3c2c53;color:#d1afff}.rarity.legendary{background:#4a3b1e;color:#ffdc78}
     .empty {text-align:center;color:var(--muted);padding:28px 10px}
@@ -86,21 +94,24 @@
     <section id="page-home" class="page active">
       <div class="balance">
         <div><div class="eyebrow">ТВОЙ БАЛАНС</div><div class="amount">⭐ <span id="balance">500</span></div><div class="sub">Фейковые звёзды</div></div>
-        <button class="bonus" id="bonusBtn">🎁 Бонус +200</button>
+        <button class="bonus" id="bonusBtn">🎁 Бонус +100</button>
       </div>
-      <div class="section-title"><h2>Выбирай кейс</h2><span class="hint">3 кейса</span></div>
+      <div class="section-title"><h2>Выбирай кейс</h2><span class="hint">4 кейса</span></div>
       <div class="cases">
-        <button class="case red" data-case="red"><span class="case-icon">🧰</span><span class="case-name">Красный</span><span class="price">25 ⭐</span></button>
-        <button class="case blue" data-case="blue"><span class="case-icon">🧊</span><span class="case-name">Синий</span><span class="price">45 ⭐</span></button>
-        <button class="case hydra" data-case="hydra"><span class="case-icon">🐉</span><span class="case-name">Гидра</span><span class="price">85 ⭐</span></button>
+        <button class="case red" data-case="ordinary"><span class="case-icon">🎁</span><span class="case-name">Обычный</span><span class="price">Бесплатный</span></button>
+        <button class="case dragon" data-case="dragon"><span class="case-icon">🐲</span><span class="case-name">Драконий</span><span class="price">15 ⭐</span></button>
+        <button class="case hydra" data-case="hydra"><span class="case-icon">🐉</span><span class="case-name">Гидры</span><span class="price">50 ⭐</span></button>
+        <button class="case snake" data-case="snake"><span class="case-icon">🐍</span><span class="case-name">Змеиный</span><span class="price">100 ⭐</span></button>
       </div>
+      <div class="section-title"><h2>📊 Шансы выпадения</h2><span class="hint">в каждом кейсе = 100%</span></div>
+      <div id="caseOdds" class="case-grid"></div>
       <div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div>
       <div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div>
       <div class="panel">
         <div class="section-title" style="margin:0 0 8px"><h2>🎯 Как это работает</h2></div>
-        <div class="sub" style="font-size:13px">Выбирай кейс, смотри рулетку и собирай виртуальные предметы. Все призы и звёзды существуют только внутри демо-игры.</div>
+        <div class="sub" style="font-size:13px">Выбирай кейс, смотри рулетку и собирай виртуальные предметы. Все призы и звёзды существуют только внутри демо-игры. Продажа подарков начисляет только виртуальные очки, не настоящие Telegram Stars.</div>
       </div>
-      <div class="notice">DEMO-ИГРА · Нет реальных Telegram Stars, платежей, вывода средств или настоящих NFT. Прогресс этой версии хранится только в браузере на этом устройстве.</div>
+      <div class="notice">DEMO-ИГРА · Нет реальных Telegram Stars, платежей, вывода средств или выдачи настоящих Telegram Gifts/NFT. Прогресс этой версии хранится только в браузере на этом устройстве.</div>
     </section>
 
     <section id="page-inventory" class="page">
@@ -123,7 +134,8 @@
           <div class="stat"><div class="eyebrow">NFT-ДЕМО</div><b id="nftCount">0</b></div>
         </div>
       </div>
-      <div class="panel"><h2>ℹ️ О проекте</h2><p class="sub" style="font-size:13px">CASE WORLD — фанатский симулятор открытия кейсов. Звёзды — внутриигровые очки. Коллекционные NFT здесь вымышленные и не существуют в блокчейне.</p><button class="secondary" id="resetBtn">Сбросить демо-прогресс</button></div>
+      <div class="panel"><h2>🖼️ Что может выпасть</h2><div class="sub" style="font-size:12px;margin-top:5px">Иконки всех призов из кейсов</div><div id="profileCatalog" class="catalog-grid"></div></div>
+      <div class="panel"><h2>ℹ️ О проекте</h2><p class="sub" style="font-size:13px">CASE WORLD — фанатский симулятор открытия кейсов. Звёзды — внутриигровые очки. Подарки Telegram показаны как виртуальные предметы-аналоги; их продажа начисляет только игровые очки. NFT в игре — ссылка на внешний предмет, не выдача NFT.</p><button class="secondary" id="resetBtn">Сбросить демо-прогресс</button></div>
     </section>
   </main>
 
@@ -140,32 +152,48 @@
   const tg = window.Telegram?.WebApp;
   try { tg?.ready(); tg?.expand(); tg?.setHeaderColor('#17181d'); tg?.setBackgroundColor('#17181d'); } catch(e) {}
 
+  const NFT_URL = 'https://t.me/nft/LibertyFigure-264093';
+  // Цены обычных подарков указаны по каталогу Telegram на момент подготовки; каталог может меняться.
+  // Продажа здесь — только обмен на виртуальные очки внутри демо, не на настоящие Telegram Stars.
   const CASES = {
-    red: {name:'Красный кейс', emoji:'🧰', price:25, prizes:[
-      {name:'15 фейковых звёзд', emoji:'⭐', kind:'stars', value:15, weight:40, rarity:'common'},
-      {name:'25 фейковых звёзд', emoji:'⭐', kind:'stars', value:25, weight:30, rarity:'common'},
-      {name:'50 фейковых звёзд', emoji:'⭐', kind:'stars', value:50, weight:20, rarity:'rare'},
-      {name:'Мишка', emoji:'🧸', kind:'gift', value:'Мишка', weight:10, rarity:'epic'}
+    ordinary: {name:'Обычный кейс', emoji:'🎁', price:0, daily:true, prizes:[
+      {name:'Ничего', emoji:'❌', kind:'none', value:0, weight:60, rarity:'common'},
+      {name:'15 звёзд', emoji:'⭐', kind:'stars', value:15, weight:15, rarity:'common'},
+      {name:'25 звёзд', emoji:'⭐', kind:'stars', value:25, weight:10, rarity:'common'},
+      {name:'50 звёзд', emoji:'⭐', kind:'stars', value:50, weight:7, rarity:'rare'},
+      {name:'85 звёзд', emoji:'⭐', kind:'stars', value:85, weight:5, rarity:'rare'},
+      {name:'100 звёзд', emoji:'⭐', kind:'stars', value:100, weight:3, rarity:'epic'}
     ]},
-    blue: {name:'Синий кейс', emoji:'🧊', price:45, prizes:[
-      {name:'25 фейковых звёзд', emoji:'⭐', kind:'stars', value:25, weight:35, rarity:'common'},
-      {name:'50 фейковых звёзд', emoji:'⭐', kind:'stars', value:50, weight:30, rarity:'rare'},
-      {name:'100 фейковых звёзд', emoji:'⭐', kind:'stars', value:100, weight:15, rarity:'epic'},
-      {name:'Мишка', emoji:'🧸', kind:'gift', value:'Мишка', weight:12, rarity:'rare'},
-      {name:'Роза', emoji:'🌹', kind:'gift', value:'Роза', weight:8, rarity:'epic'}
+    dragon: {name:'Драконий кейс', emoji:'🐲', price:15, prizes:[
+      {name:'Ничего', emoji:'❌', kind:'none', value:0, weight:30, rarity:'common'},
+      {name:'15 звёзд', emoji:'⭐', kind:'stars', value:15, weight:25, rarity:'common'},
+      {name:'25 звёзд', emoji:'⭐', kind:'stars', value:25, weight:20, rarity:'common'},
+      {name:'50 звёзд', emoji:'⭐', kind:'stars', value:50, weight:15, rarity:'rare'},
+      {name:'100 звёзд', emoji:'⭐', kind:'stars', value:100, weight:6, rarity:'epic'},
+      {name:'Кольцо Telegram', emoji:'💍', kind:'gift', value:'Кольцо Telegram', sellValue:100, weight:4, rarity:'legendary'}
     ]},
-    hydra: {name:'Кейс Гидра', emoji:'🐉', price:85, prizes:[
-      {name:'50 фейковых звёзд', emoji:'⭐', kind:'stars', value:50, weight:30, rarity:'common'},
-      {name:'100 фейковых звёзд', emoji:'⭐', kind:'stars', value:100, weight:25, rarity:'rare'},
-      {name:'150 фейковых звёзд', emoji:'⭐', kind:'stars', value:150, weight:18, rarity:'epic'},
-      {name:'200 фейковых звёзд', emoji:'⭐', kind:'stars', value:200, weight:12, rarity:'legendary'},
-      {name:'Роза', emoji:'🌹', kind:'gift', value:'Роза', weight:8, rarity:'rare'},
-      {name:'Кольцо', emoji:'💍', kind:'gift', value:'Кольцо', weight:5, rarity:'epic'},
-      {name:'NFT Кристалл дракона', emoji:'💎', kind:'gift', value:'NFT Кристалл дракона', weight:2, rarity:'legendary'}
+    hydra: {name:'Кейс Гидры', emoji:'🐉', price:50, prizes:[
+      {name:'15 звёзд', emoji:'⭐', kind:'stars', value:15, weight:30, rarity:'common'},
+      {name:'25 звёзд', emoji:'⭐', kind:'stars', value:25, weight:25, rarity:'common'},
+      {name:'50 звёзд', emoji:'⭐', kind:'stars', value:50, weight:15, rarity:'rare'},
+      {name:'100 звёзд', emoji:'⭐', kind:'stars', value:100, weight:13, rarity:'rare'},
+      {name:'Роза Telegram', emoji:'🌹', kind:'gift', value:'Роза Telegram', sellValue:25, weight:7, rarity:'epic'},
+      {name:'Букет Telegram', emoji:'💐', kind:'gift', value:'Букет Telegram', sellValue:50, weight:6, rarity:'epic'},
+      {name:'Алмаз Telegram', emoji:'💎', kind:'gift', value:'Алмаз Telegram', sellValue:100, weight:3, rarity:'legendary'},
+      {name:'NFT Liberty Figure', emoji:'🗽', kind:'nft', value:'NFT Liberty Figure', url:NFT_URL, weight:1, rarity:'legendary'}
+    ]},
+    snake: {name:'Змеиный кейс', emoji:'🐍', price:100, prizes:[
+      {name:'25 звёзд', emoji:'⭐', kind:'stars', value:25, weight:30, rarity:'common'},
+      {name:'50 звёзд', emoji:'⭐', kind:'stars', value:50, weight:25, rarity:'common'},
+      {name:'100 звёзд', emoji:'⭐', kind:'stars', value:100, weight:20, rarity:'rare'},
+      {name:'Мишка Telegram', emoji:'🧸', kind:'gift', value:'Мишка Telegram', sellValue:15, weight:15, rarity:'epic'},
+      {name:'Подарочная коробка Telegram', emoji:'🎁', kind:'gift', value:'Подарочная коробка Telegram', sellValue:25, weight:5, rarity:'epic'},
+      {name:'Трофей Telegram', emoji:'🏆', kind:'gift', value:'Трофей Telegram', sellValue:100, weight:3, rarity:'legendary'},
+      {name:'NFT Liberty Figure', emoji:'🗽', kind:'nft', value:'NFT Liberty Figure', url:NFT_URL, weight:2, rarity:'legendary'}
     ]}
   };
   const rarityNames = {common:'Обычный',rare:'Редкий',epic:'Эпический',legendary:'Легендарный'};
-  const defaultState = () => ({balance:500, bonusDate:'', inventory:{}, history:[], opened:0});
+  const defaultState = () => ({balance:500, bonusDate:'', freeCaseDate:'', inventory:{}, history:[], opened:0});
   let state;
   try { state = {...defaultState(), ...JSON.parse(localStorage.getItem('caseWorldDemo') || '{}')}; } catch(e) { state=defaultState(); }
   let busy=false, lastCase='red', toastTimer;
@@ -175,6 +203,8 @@
   function showToast(msg){ const el=$('toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),2300); }
   function renderAll(){
     $('balance').textContent=state.balance; $('profileBalance').textContent=state.balance;
+    const bonusToday=state.bonusDate===todayKey(); $('bonusBtn').textContent=bonusToday?'✅ Бонус получен':'🎁 Бонус +100'; $('bonusBtn').disabled=bonusToday; $('bonusBtn').style.opacity=bonusToday?'.65':'1';
+    const freeBtn=document.querySelector('[data-case=ordinary]'); if(freeBtn){const used=state.freeCaseDate===todayKey();freeBtn.querySelector('.price').textContent=used?'Уже открыт сегодня':'Бесплатный';freeBtn.disabled=used;freeBtn.style.opacity=used?'.65':'1';}
     $('openedCount').textContent=state.opened;
     const entries=Object.entries(state.inventory);
     const total=entries.reduce((s,[,v])=>s+v.count,0);
@@ -182,17 +212,39 @@
     $('nftCount').textContent=entries.filter(([k])=>k.startsWith('NFT ')).reduce((s,[,v])=>s+v.count,0);
     const user=tg?.initDataUnsafe?.user;
     if(user){ $('playerName').textContent=[user.first_name,user.last_name].filter(Boolean).join(' ') || 'Игрок'; $('playerId').textContent='Telegram ID: '+user.id; if(user.username) $('playerId').textContent+=' · @'+user.username; }
-    renderInventory(); renderHistory();
+    renderInventory(); renderHistory(); renderCaseOdds(); renderProfileCatalog();
   }
   function renderInventory(){
     const box=$('inventory'), entries=Object.entries(state.inventory).sort((a,b)=>rarityRank(b[1].rarity)-rarityRank(a[1].rarity));
     if(!entries.length){box.innerHTML='<div class="empty"><div class="big">🎒</div>Инвентарь пока пуст.<br>Открой первый кейс!</div>';return;}
-    box.innerHTML=entries.map(([name,item])=>`<div class="item"><div class="item-emoji">${item.emoji}</div><div class="item-info"><div class="item-name">${escapeHtml(name)}</div><div class="item-meta">${item.kind==='nft'?'Вымышленный NFT-предмет':'Коллекционный предмет'}</div></div><span class="rarity ${item.rarity}">${rarityNames[item.rarity]}</span><b>×${item.count}</b></div>`).join('');
+    box.innerHTML=entries.map(([name,item])=>`<div class="item"><div class="item-emoji">${item.emoji}</div><div class="item-info"><div class="item-name">${escapeHtml(name)}</div><div class="item-meta">${item.kind==='nft'?'Коллекционный NFT · ссылка на Telegram':item.kind==='gift'?'Виртуальный аналог подарка · цена '+item.sellValue+' ⭐':'Коллекционный предмет'}</div></div><span class="rarity ${item.rarity}">${rarityNames[item.rarity]}</span><b>×${item.count}</b>${item.kind==='gift'?`<button class="sell-btn" data-sell="${escapeHtml(name)}">Продать<br>+${item.sellValue} ⭐</button>`:''}</div>`).join('');
+    box.querySelectorAll('[data-sell]').forEach(btn=>btn.addEventListener('click',()=>sellGift(btn.dataset.sell)));
+  }
+  function sellGift(name){
+    const item=state.inventory[name];
+    if(!item || item.kind!=='gift' || item.count<1){showToast('Этот подарок нельзя продать.');return;}
+    const value=Number(item.sellValue)||0;
+    if(!value){showToast('Для этого подарка не задана стоимость.');return;}
+    item.count--; if(item.count<=0) delete state.inventory[name];
+    state.balance+=value;
+    state.history.unshift({caseName:'Продажа подарка',caseEmoji:item.emoji,prize:'Продан '+name+' · +'+value+' ⭐',rarity:item.rarity,time:new Date().toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})});
+    state.history=state.history.slice(0,30);save();showToast('Подарок продан за '+value+' виртуальных ⭐');
   }
   function renderHistory(){
     const box=$('history');
     if(!state.history.length){box.innerHTML='<div class="empty"><div class="big">🕘</div>Здесь появятся твои выигрыши.</div>';return;}
     box.innerHTML=state.history.slice(0,30).map(h=>`<div class="history-row"><div class="item-emoji">${h.caseEmoji}</div><div class="detail"><b>${escapeHtml(h.prize)}</b><small>${escapeHtml(h.caseName)} · ${escapeHtml(h.time)}</small></div><span class="rarity ${h.rarity}">${rarityNames[h.rarity]}</span></div>`).join('');
+  }
+  function todayKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function renderCaseOdds(){
+    const box=$('caseOdds'); if(!box)return;
+    box.innerHTML=Object.entries(CASES).map(([id,c])=>`<div class="case-card"><div class="case-card-head"><span class="case-card-icon">${c.emoji}</span><div><div class="case-card-title">${c.name}</div><div class="case-card-price">${c.price===0?'Бесплатный':c.price+' ⭐'}${c.daily?' · 1 раз в день':''}</div></div></div>${c.prizes.map(p=>`<div class="drop-row"><span class="drop-icon">${p.emoji}</span><span class="drop-name">${escapeHtml(p.name)}</span><span class="drop-chance">${p.weight}%</span></div>`).join('')}</div>`).join('');
+  }
+  function renderProfileCatalog(){
+    const box=$('profileCatalog'); if(!box)return;
+    const items=new Map();
+    Object.values(CASES).forEach(c=>c.prizes.forEach(p=>{const key=p.kind==='stars'?p.name:p.value;if(!items.has(key))items.set(key,p);}));
+    box.innerHTML=[...items.values()].map(p=>`<div class="catalog-item">${p.url?`<a href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">`:''}<div class="drop-icon">${p.emoji}</div><div class="catalog-name">${escapeHtml(p.name)}</div>${p.url?'<div class="catalog-note">Открыть NFT</div>':''}${p.url?'</a>':''}</div>`).join('');
   }
   function rarityRank(r){return ({common:1,rare:2,epic:3,legendary:4})[r]||0;}
   function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -204,9 +256,9 @@
   }
   document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
   $('bonusBtn').addEventListener('click',()=>{
-    const today=new Date().toLocaleDateString('en-CA');
+    const today=todayKey();
     if(state.bonusDate===today){showToast('Бонус уже получен сегодня!');return;}
-    state.bonusDate=today;state.balance+=200;save();showToast('Получено +200 фейковых звёзд!');
+    state.bonusDate=today;state.balance+=100;save();showToast('Получено +100 фейковых звёзд!');
   });
   document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.case)));
   $('againBtn').addEventListener('click',()=>openCase(lastCase));
@@ -216,32 +268,32 @@
 
   async function openCase(id){
     if(busy)return;
-    const c=CASES[id];lastCase=id;
-    if(state.balance<c.price){showToast('Не хватает фейковых звёзд! Забери ежедневный бонус.');return;}
-    busy=true;state.balance-=c.price;save();
+    const c=CASES[id]; if(!c)return; lastCase=id;
+    const today=todayKey();
+    if(c.daily && state.freeCaseDate===today){showToast('Бесплатный обычный кейс уже получен сегодня!');return;}
+    if(state.balance<c.price){showToast('Не хватает фейковых звёзд! Забери ежедневный бонус +100.');return;}
+    busy=true;state.balance-=c.price;
+    if(c.daily)state.freeCaseDate=today;
+    save();
     $('result').classList.remove('show');$('reelWrap').classList.add('show');
     const reel=$('reel');reel.style.transition='none';reel.style.transform='translateX(0)';
     const winner=pick(c.prizes);
-    // Put the winning item well before the end so the reel never stops on blank space.
-    const before=Array.from({length:32},()=>c.prizes[Math.floor(Math.random()*c.prizes.length)]);
-    const after=Array.from({length:6},()=>c.prizes[Math.floor(Math.random()*c.prizes.length)]);
-    const sequence=[...before,winner,...after];
+    const sequence=Array.from({length:27},()=>c.prizes[Math.floor(Math.random()*c.prizes.length)]);
+    sequence.push(winner);
     reel.innerHTML=sequence.map(p=>`<div class="reel-card ${p.rarity}"><div class="emoji">${p.emoji}</div><div>${escapeHtml(p.name)}</div></div>`).join('');
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-    // Measure the actual rendered card dimensions; do not assume a fixed card width.
-    const wrap=reel.parentElement;
-    const winnerCard=reel.children[before.length];
-    const cardRect=winnerCard.getBoundingClientRect();
-    const reelRect=reel.getBoundingClientRect();
-    const targetX=(cardRect.left-reelRect.left)+(cardRect.width/2)-(wrap.clientWidth/2);
+    const cards=[...reel.children]; const targetCard=cards[cards.length-1];
+    const reelRect=reel.getBoundingClientRect(), cardRect=targetCard.getBoundingClientRect();
+    const targetX=(cardRect.left + cardRect.width/2) - (reelRect.left + reelRect.width/2);
     reel.style.transition='transform 4.1s cubic-bezier(.08,.72,.12,1)';
-    reel.style.transform=`translateX(${-Math.max(0,targetX)}px)`;
-    await new Promise(r=>setTimeout(r,4300));
+    reel.style.transform=`translateX(${-targetX}px)`;
+    await new Promise(r=>setTimeout(r,4250));
     if(winner.kind==='stars')state.balance+=winner.value;
-    else {
+    else if(winner.kind==='gift'||winner.kind==='nft'){
       const name=winner.value;
-      if(!state.inventory[name])state.inventory[name]={count:0,emoji:winner.emoji,rarity:winner.rarity,kind:name.startsWith('NFT ')?'nft':'gift'};
+      if(!state.inventory[name])state.inventory[name]={count:0,emoji:winner.emoji,rarity:winner.rarity,kind:winner.kind,url:winner.url||'',sellValue:winner.sellValue||0};
       state.inventory[name].count++;
+      if(winner.sellValue)state.inventory[name].sellValue=winner.sellValue;
       if(rarityRank(winner.rarity)>rarityRank(state.inventory[name].rarity))state.inventory[name].rarity=winner.rarity;
     }
     state.opened++;
@@ -249,7 +301,12 @@
     state.history=state.history.slice(0,30);save();
     $('resultEmoji').textContent=winner.emoji;
     $('resultTitle').textContent=winner.name;
-    $('resultSub').textContent='Редкость: '+rarityNames[winner.rarity]+' · Баланс: '+state.balance+' ⭐';
+    const odds=winner.weight+'%';
+    $('resultSub').textContent=(winner.kind==='none'?'В этот раз без приза':winner.kind==='nft'?'Коллекционный NFT · '+odds:'Шанс выпадения: '+odds)+' · Баланс: '+state.balance+' ⭐';
+    if(winner.url){$('resultTitle').innerHTML=`<a href="${winner.url}" target="_blank" rel="noopener" style="color:inherit">${escapeHtml(winner.name)} ↗</a>`;} else {$('resultTitle').textContent=winner.name;}
+    $('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Открыть ещё';
+    $('againBtn').disabled=!!(c.daily && state.freeCaseDate===today);
+    $('againBtn').style.opacity=$('againBtn').disabled?'.6':'1';
     $('result').classList.add('show');busy=false;
     try{tg?.HapticFeedback?.notificationOccurred('success');}catch(e){}
   }
