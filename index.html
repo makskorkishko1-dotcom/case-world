@@ -42,7 +42,7 @@
     .case-name { display:block;font-size:12px;font-weight:850; }
     .price { display:block;color:var(--gold);font-size:12px;font-weight:800;margin-top:5px; }
     .panel { background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:14px;margin-top:12px; }
-    .reel-wrap { display:none;overflow:hidden;position:relative;border:1px solid #494b54;border-radius:16px;background:#191a20;padding:14px 0;margin-top:15px; }
+    .modal-backdrop{display:none;position:fixed;inset:0;background:#08090ddd;z-index:50;align-items:center;justify-content:center;padding:18px;overflow-y:auto}.modal-backdrop.show{display:flex}.case-modal{width:min(100%,520px);max-height:88vh;overflow:auto;background:#202128;border:1px solid #454853;border-radius:20px;padding:16px;box-shadow:0 20px 70px #000b}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.modal-close{background:#343740;color:#fff;border:1px solid #4a4d57;border-radius:9px;padding:7px 11px}.reel-wrap { display:none;overflow:hidden;position:relative;border:1px solid #494b54;border-radius:16px;background:#191a20;padding:14px 0;margin-top:15px; }
     .reel-wrap.show { display:block; }
     .reel-pointer { position:absolute;top:0;bottom:0;left:50%;width:3px;background:var(--gold);z-index:3;box-shadow:0 0 14px #f4c451aa; }
     .reel { display:flex;gap:8px;transform:translateX(0);padding:6px 0;will-change:transform; }
@@ -103,10 +103,6 @@
         <button class="case hydra" data-case="hydra"><span class="case-icon">🐉</span><span class="case-name">Гидры</span><span class="price">50 ⭐</span></button>
         <button class="case snake" data-case="snake"><span class="case-icon">🐍</span><span class="case-name">Змеиный</span><span class="price">100 ⭐</span></button>
       </div>
-      <div class="section-title"><h2>📊 Шансы выпадения</h2><span class="hint">в каждом кейсе = 100%</span></div>
-      <div id="caseOdds" class="case-grid"></div>
-      <div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div>
-      <div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div>
       <div class="panel">
         <div class="section-title" style="margin:0 0 8px"><h2>🎯 Как это работает</h2></div>
         <div class="sub" style="font-size:13px">Выбирай кейс, смотри рулетку и собирай виртуальные предметы. Все призы и звёзды существуют только внутри демо-игры. Продажа подарков начисляет только виртуальные очки, не настоящие Telegram Stars.</div>
@@ -134,7 +130,6 @@
           <div class="stat"><div class="eyebrow">NFT-ДЕМО</div><b id="nftCount">0</b></div>
         </div>
       </div>
-      <div class="panel"><h2>🖼️ Что может выпасть</h2><div class="sub" style="font-size:12px;margin-top:5px">Иконки всех призов из кейсов</div><div id="profileCatalog" class="catalog-grid"></div></div>
       <div class="panel"><h2>ℹ️ О проекте</h2><p class="sub" style="font-size:13px">CASE WORLD — фанатский симулятор открытия кейсов. Звёзды — внутриигровые очки. Подарки Telegram показаны как виртуальные предметы-аналоги; их продажа начисляет только игровые очки. NFT в игре — ссылка на внешний предмет, не выдача NFT.</p><button class="secondary" id="resetBtn">Сбросить демо-прогресс</button></div>
     </section>
   </main>
@@ -146,6 +141,14 @@
     <button data-page="profile"><span class="nav-icon">👤</span>Профиль</button>
   </div></nav>
   <div id="toast" class="toast"></div>
+  <div id="caseModal" class="modal-backdrop"><div class="case-modal">
+    <div class="modal-head"><div><h2 id="modalCaseTitle">Кейс</h2><div class="sub" id="modalCasePrice"></div></div><button class="modal-close" id="closeCaseBtn">✕</button></div>
+    <div class="section-title"><h2>📊 Шансы выпадения</h2><span class="hint">100%</span></div>
+    <div id="caseOdds" class="case-grid"></div>
+    <button class="primary" id="openSelectedBtn">🎁 Открыть кейс</button>
+    <div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div>
+    <div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div>
+  </div></div>
 
 <script>
 (() => {
@@ -196,7 +199,8 @@
   const defaultState = () => ({balance:500, bonusDate:'', freeCaseDate:'', inventory:{}, history:[], opened:0});
   let state;
   try { state = {...defaultState(), ...JSON.parse(localStorage.getItem('caseWorldDemo') || '{}')}; } catch(e) { state=defaultState(); }
-  let busy=false, lastCase='red', toastTimer;
+
+  let busy=false, lastCase='ordinary', selectedCase='ordinary', toastTimer;
 
   const $ = id => document.getElementById(id);
   function save(){ localStorage.setItem('caseWorldDemo', JSON.stringify(state)); renderAll(); }
@@ -212,19 +216,23 @@
     $('nftCount').textContent=entries.filter(([k])=>k.startsWith('NFT ')).reduce((s,[,v])=>s+v.count,0);
     const user=tg?.initDataUnsafe?.user;
     if(user){ $('playerName').textContent=[user.first_name,user.last_name].filter(Boolean).join(' ') || 'Игрок'; $('playerId').textContent='Telegram ID: '+user.id; if(user.username) $('playerId').textContent+=' · @'+user.username; }
-    renderInventory(); renderHistory(); renderCaseOdds(); renderProfileCatalog();
+    renderInventory(); renderHistory();
   }
+  const giftPrices = {'Роза Telegram':25,'Мишка Telegram':15,'Кольцо Telegram':100,'Букет Telegram':50,'Алмаз Telegram':100,'Подарочная коробка Telegram':25,'Трофей Telegram':100,'Роза':25,'Мишка':15,'Кольцо':100,'Букет':50,'Алмаз':100,'Подарочная коробка':25,'Трофей':100};
+  function giftPrice(name,item){ return giftPrices[name]||giftPrices[String(name).replace(' Telegram','')]||Number(item?.sellValue)||0; }
+  for(const [n,it] of Object.entries(state.inventory||{})){ if(it && (it.kind==='gift'||giftPrices[n]||giftPrices[String(n).replace(' Telegram','')])){it.kind='gift';it.sellValue=giftPrice(n,it);} }
   function renderInventory(){
     const box=$('inventory'), entries=Object.entries(state.inventory).sort((a,b)=>rarityRank(b[1].rarity)-rarityRank(a[1].rarity));
     if(!entries.length){box.innerHTML='<div class="empty"><div class="big">🎒</div>Инвентарь пока пуст.<br>Открой первый кейс!</div>';return;}
-    box.innerHTML=entries.map(([name,item])=>`<div class="item"><div class="item-emoji">${item.emoji}</div><div class="item-info"><div class="item-name">${escapeHtml(name)}</div><div class="item-meta">${item.kind==='nft'?'Коллекционный NFT · ссылка на Telegram':item.kind==='gift'?'Виртуальный аналог подарка · цена '+item.sellValue+' ⭐':'Коллекционный предмет'}</div></div><span class="rarity ${item.rarity}">${rarityNames[item.rarity]}</span><b>×${item.count}</b>${item.kind==='gift'?`<button class="sell-btn" data-sell="${escapeHtml(name)}">Продать<br>+${item.sellValue} ⭐</button>`:''}</div>`).join('');
+    box.innerHTML=entries.map(([name,item])=>{const price=item.kind==='gift'?giftPrice(name,item):0;if(item.kind==='gift'&&price)item.sellValue=price;return `<div class="item"><div class="item-emoji">${item.emoji}</div><div class="item-info"><div class="item-name">${escapeHtml(name)}</div><div class="item-meta">${item.kind==='nft'?'Коллекционный NFT · ссылка на Telegram':item.kind==='gift'?'Виртуальный аналог подарка · цена '+(price||'не задана')+' ⭐':'Коллекционный предмет'}</div></div><span class="rarity ${item.rarity}">${rarityNames[item.rarity]||'Обычный'}</span><b>×${item.count}</b>${item.kind==='gift'?`<button class="sell-btn" data-sell="${escapeHtml(name)}">Продать<br>+${price} ⭐</button>`:''}</div>`}).join('');
+    localStorage.setItem('caseWorldDemo',JSON.stringify(state));
     box.querySelectorAll('[data-sell]').forEach(btn=>btn.addEventListener('click',()=>sellGift(btn.dataset.sell)));
   }
   function sellGift(name){
     const item=state.inventory[name];
     if(!item || item.kind!=='gift' || item.count<1){showToast('Этот подарок нельзя продать.');return;}
-    const value=Number(item.sellValue)||0;
-    if(!value){showToast('Для этого подарка не задана стоимость.');return;}
+    const value=giftPrice(name,item);
+    if(!value){showToast('Не найдена цена подарка.');return;}
     item.count--; if(item.count<=0) delete state.inventory[name];
     state.balance+=value;
     state.history.unshift({caseName:'Продажа подарка',caseEmoji:item.emoji,prize:'Продан '+name+' · +'+value+' ⭐',rarity:item.rarity,time:new Date().toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})});
@@ -236,20 +244,22 @@
     box.innerHTML=state.history.slice(0,30).map(h=>`<div class="history-row"><div class="item-emoji">${h.caseEmoji}</div><div class="detail"><b>${escapeHtml(h.prize)}</b><small>${escapeHtml(h.caseName)} · ${escapeHtml(h.time)}</small></div><span class="rarity ${h.rarity}">${rarityNames[h.rarity]}</span></div>`).join('');
   }
   function todayKey(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-  function renderCaseOdds(){
-    const box=$('caseOdds'); if(!box)return;
-    box.innerHTML=Object.entries(CASES).map(([id,c])=>`<div class="case-card"><div class="case-card-head"><span class="case-card-icon">${c.emoji}</span><div><div class="case-card-title">${c.name}</div><div class="case-card-price">${c.price===0?'Бесплатный':c.price+' ⭐'}${c.daily?' · 1 раз в день':''}</div></div></div>${c.prizes.map(p=>`<div class="drop-row"><span class="drop-icon">${p.emoji}</span><span class="drop-name">${escapeHtml(p.name)}</span><span class="drop-chance">${p.weight}%</span></div>`).join('')}</div>`).join('');
+  function renderCaseOdds(id=selectedCase){
+    const box=$('caseOdds'), c=CASES[id]; if(!box||!c)return;
+    box.innerHTML=c.prizes.map(p=>`<div class="case-card"><div class="case-card-head"><span class="case-card-icon">${p.emoji}</span><div><div class="case-card-title">${escapeHtml(p.name)}</div><div class="case-card-price">${p.kind==='gift'?'Продажа за '+p.sellValue+' ⭐':p.kind==='stars'?'Выигрыш '+p.value+' ⭐':p.kind==='nft'?'NFT-предмет':'Без приза'}</div></div><b style="color:var(--gold);margin-left:auto">${p.weight}%</b></div></div>`).join('');
   }
-  function renderProfileCatalog(){
-    const box=$('profileCatalog'); if(!box)return;
-    const items=new Map();
-    Object.values(CASES).forEach(c=>c.prizes.forEach(p=>{const key=p.kind==='stars'?p.name:p.value;if(!items.has(key))items.set(key,p);}));
-    box.innerHTML=[...items.values()].map(p=>`<div class="catalog-item">${p.url?`<a href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">`:''}<div class="drop-icon">${p.emoji}</div><div class="catalog-name">${escapeHtml(p.name)}</div>${p.url?'<div class="catalog-note">Открыть NFT</div>':''}${p.url?'</a>':''}</div>`).join('');
+  function showCaseModal(id){
+    selectedCase=id;lastCase=id;const c=CASES[id];if(!c)return;
+    $('modalCaseTitle').textContent=c.emoji+' '+c.name;
+    $('modalCasePrice').textContent=c.price===0?'Бесплатно · 1 раз в день':c.price+' ⭐ за открытие';
+    $('reelWrap').classList.remove('show');$('result').classList.remove('show');$('openSelectedBtn').style.display='block';$('openSelectedBtn').disabled=false;
+    renderCaseOdds(id);$('caseModal').classList.add('show');
   }
   function rarityRank(r){return ({common:1,rare:2,epic:3,legendary:4})[r]||0;}
   function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   function pick(prizes){const total=prizes.reduce((s,p)=>s+p.weight,0);let n=Math.random()*total;for(const p of prizes){n-=p.weight;if(n<0)return p;}return prizes[prizes.length-1];}
   function showPage(name){
+    $('caseModal').classList.remove('show');
     document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));
     document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
     if(name!=='home'){$('reelWrap').classList.remove('show');$('result').classList.remove('show');}
@@ -260,8 +270,11 @@
     if(state.bonusDate===today){showToast('Бонус уже получен сегодня!');return;}
     state.bonusDate=today;state.balance+=100;save();showToast('Получено +100 фейковых звёзд!');
   });
-  document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>openCase(b.dataset.case)));
-  $('againBtn').addEventListener('click',()=>openCase(lastCase));
+  document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>showCaseModal(b.dataset.case)));
+  $('closeCaseBtn').addEventListener('click',()=>{if(!busy)$('caseModal').classList.remove('show');});
+  $('caseModal').addEventListener('click',e=>{if(e.target===$('caseModal')&&!busy)$('caseModal').classList.remove('show');});
+  $('openSelectedBtn').addEventListener('click',()=>openCase(selectedCase));
+  $('againBtn').addEventListener('click',()=>{ $('result').classList.remove('show');$('reelWrap').classList.remove('show');$('openSelectedBtn').style.display='block';$('openSelectedBtn').disabled=false;openCase(lastCase); });
   $('resetBtn').addEventListener('click',()=>{
     if(confirm('Точно сбросить весь демо-прогресс на этом устройстве?')){state=defaultState();save();showPage('home');showToast('Демо-прогресс сброшен');}
   });
@@ -272,7 +285,7 @@
     const today=todayKey();
     if(c.daily && state.freeCaseDate===today){showToast('Бесплатный обычный кейс уже получен сегодня!');return;}
     if(state.balance<c.price){showToast('Не хватает фейковых звёзд! Забери ежедневный бонус +100.');return;}
-    busy=true;state.balance-=c.price;
+    busy=true;$('openSelectedBtn').disabled=true;$('openSelectedBtn').style.display='none';state.balance-=c.price;
     if(c.daily)state.freeCaseDate=today;
     save();
     $('result').classList.remove('show');$('reelWrap').classList.add('show');
@@ -283,8 +296,8 @@
     reel.innerHTML=sequence.map(p=>`<div class="reel-card ${p.rarity}"><div class="emoji">${p.emoji}</div><div>${escapeHtml(p.name)}</div></div>`).join('');
     await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
     const cards=[...reel.children]; const targetCard=cards[cards.length-1];
-    const reelRect=reel.getBoundingClientRect(), cardRect=targetCard.getBoundingClientRect();
-    const targetX=(cardRect.left + cardRect.width/2) - (reelRect.left + reelRect.width/2);
+    const wrapRect=$('reelWrap').getBoundingClientRect(), cardRect=targetCard.getBoundingClientRect();
+    const targetX=(cardRect.left + cardRect.width/2) - (wrapRect.left + wrapRect.width/2);
     reel.style.transition='transform 4.1s cubic-bezier(.08,.72,.12,1)';
     reel.style.transform=`translateX(${-targetX}px)`;
     await new Promise(r=>setTimeout(r,4250));
@@ -307,7 +320,7 @@
     $('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Открыть ещё';
     $('againBtn').disabled=!!(c.daily && state.freeCaseDate===today);
     $('againBtn').style.opacity=$('againBtn').disabled?'.6':'1';
-    $('result').classList.add('show');busy=false;
+    $('result').classList.add('show');$('openSelectedBtn').style.display='none';busy=false;
     try{tg?.HapticFeedback?.notificationOccurred('success');}catch(e){}
   }
   renderAll();
