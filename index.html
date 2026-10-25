@@ -9,22 +9,101 @@
 <style>
 :root{color-scheme:dark;--bg:#17181d;--panel:#22242b;--muted:#a4a7b2;--text:#f5f6fa;--gold:#f4c451;--line:#393c46}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#292b34 0%,var(--bg) 58%);color:var(--text);font:15px/1.4 system-ui,sans-serif;min-height:100vh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}button{font:inherit;cursor:pointer;border:0}.app{width:min(100%,520px);margin:auto;padding:18px 15px 94px}header{display:flex;align-items:center;gap:12px;margin:4px 0 18px}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#4a4d58,#292b32);font-size:25px}h1{font-size:21px;letter-spacing:1.5px;margin:0;font-weight:900}h2{font-size:16px;margin:0;font-weight:800}.sub{color:var(--muted);font-size:12px;margin-top:3px}.demo{margin-left:auto;border:1px solid #60512c;color:var(--gold);background:#3a3120;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:800}.balance{background:linear-gradient(120deg,#33343b,#24262d);border:1px solid #42444d;border-radius:19px;padding:17px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:8px}.eyebrow{color:var(--muted);font-size:11px;letter-spacing:1px;font-weight:700}.amount{color:var(--gold);font-size:27px;font-weight:900;margin-top:4px}.bonus{background:#40351f;color:#ffda78;border:1px solid #65532c;border-radius:12px;padding:10px 12px;font-weight:800;font-size:12px}.section-title{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 11px}.hint{color:var(--muted);font-size:11px}.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.case{padding:13px 7px 12px;border-radius:17px;text-align:center;color:var(--text);border:1px solid var(--line);background:linear-gradient(160deg,#30323a,#22242a);min-width:0}.case.red{border-color:#653940;background:linear-gradient(160deg,#482b32,#282329)}.case.dragon{border-color:#386b72;background:linear-gradient(160deg,#24464b,#22262e)}.case.hydra{border-color:#6b5730;background:linear-gradient(160deg,#4a3a24,#28252a)}.case.snake{border-color:#46734b;background:linear-gradient(160deg,#263f2b,#22262e)}.case-icon{font-size:35px;display:block;margin-bottom:8px}.case-name{display:block;font-size:12px;font-weight:850}.price{display:block;color:var(--gold);font-size:12px;font-weight:800;margin-top:5px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:14px;margin-top:12px}.page{display:none}.page.active{display:block}.nav{position:fixed;bottom:0;left:0;right:0;padding:9px 10px calc(9px + env(safe-area-inset-bottom));background:#1b1c22ed;backdrop-filter:blur(14px);border-top:1px solid #343640;display:flex;justify-content:center;z-index:10}.nav-inner{width:min(100%,520px);display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.nav button{background:transparent;color:#a8abb5;border-radius:11px;padding:8px 2px;font-size:11px;font-weight:750}.nav button.active{color:var(--gold);background:#383124}.nav-icon{display:block;font-size:19px;margin-bottom:2px}.modal-backdrop{display:none;position:fixed;inset:0;background:#08090ddd;z-index:50;align-items:center;justify-content:center;padding:12px;overflow-y:auto}.modal-backdrop.show{display:flex}.case-modal{width:min(100%,520px);max-height:94vh;overflow:auto;background:#202128;border:1px solid #454853;border-radius:20px;padding:15px;box-shadow:0 20px 70px #000b}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.modal-close,.secondary{background:#343740;color:#fff;border:1px solid #4a4d57;border-radius:10px;padding:8px 11px}.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.case-card{background:#292b33;border:1px solid #393c46;border-radius:13px;padding:9px;min-width:0;display:flex;align-items:center;gap:8px}.case-card-icon{font-size:26px;flex-shrink:0}.case-card-main{min-width:0;flex:1}.case-card-title{font-weight:850;font-size:12px;overflow-wrap:anywhere}.case-card-price{font-size:10px;color:var(--muted);margin-top:2px}.case-card-chance{font-size:12px;color:var(--gold);font-weight:900;margin-top:5px;text-align:left}.primary{width:100%;border-radius:13px;background:linear-gradient(120deg,#f8d46c,#e8ad35);color:#211b0c;padding:13px;font-weight:900;margin-top:11px}.reel-wrap{display:none;overflow:hidden;position:relative;border:1px solid #494b54;border-radius:16px;background:#191a20;padding:14px 0;margin-top:15px}.reel-wrap.show{display:block}.reel-pointer{position:absolute;top:0;bottom:0;left:50%;width:3px;transform:translateX(-50%);background:var(--gold);z-index:3;box-shadow:0 0 14px #f4c451aa;pointer-events:none}.reel{display:flex;gap:8px;transform:translateX(0);padding:6px 0;will-change:transform;width:max-content}.reel-card{flex:0 0 104px;height:95px;border:1px solid #464953;background:#2a2c34;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;font-size:11px;overflow:hidden}.reel-card .emoji{font-size:28px;margin-bottom:6px}.common{border-color:#5b606a}.rare{border-color:#4a9cda!important}.epic{border-color:#a37be8!important}.legendary{border-color:#e6b64b!important}.result{display:none;text-align:center;padding:15px;margin-top:12px;background:#302d24;border:1px solid #65552e;border-radius:16px}.result.show{display:block;animation:pop .3s ease-out}.result .big{font-size:37px}.result-title{font-size:17px;font-weight:900;color:var(--gold);margin:6px 0}.item-list{display:grid;gap:8px;margin-top:12px}.item{display:flex;align-items:center;gap:9px;background:#2b2d35;border:1px solid #3c3f49;border-radius:13px;padding:10px}.item-emoji{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#383a44;font-size:24px;flex-shrink:0}.item-info{flex:1;min-width:0}.item-name{font-weight:800}.item-meta{font-size:10px;color:var(--muted);margin-top:3px}.sell-btn{background:#3a3322;border:1px solid #66542b;color:#ffda78;border-radius:9px;padding:7px;font-size:10px;font-weight:850;white-space:nowrap}.empty{text-align:center;color:var(--muted);padding:25px 10px}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}.stat{background:#2b2d35;border:1px solid #3c3f49;border-radius:13px;padding:13px}.stat b{display:block;font-size:22px;margin-top:4px}.history-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #3a3c45}.history-row .detail{flex:1}.history-row .detail b{display:block;font-size:12px}.history-row small{color:var(--muted);font-size:10px}.notice{font-size:11px;line-height:1.5;color:#9da0ab;margin-top:17px;text-align:center}.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#f1d06a;color:#201b0d;padding:10px 14px;border-radius:12px;font-weight:800;font-size:13px;z-index:60;transition:.2s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}@keyframes pop{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}@media(min-width:430px){.app{padding-left:19px;padding-right:19px}.case{padding-top:16px;padding-bottom:15px}}
+
+/* iOS Liquid Glass redesign */
+:root{color-scheme:dark;--bg:#080b14;--panel:rgba(255,255,255,.075);--muted:#aeb8cc;--text:#f7f8ff;--gold:#f7d77b;--line:rgba(255,255,255,.14)}
+body{background:radial-gradient(ellipse at 12% 0%,rgba(76,112,255,.28),transparent 38%),radial-gradient(ellipse at 95% 25%,rgba(167,95,255,.22),transparent 35%),linear-gradient(160deg,#090d18,#101525 55%,#090c14);background-attachment:fixed}
+.app{padding-top:22px}
+header .logo{background:linear-gradient(145deg,rgba(255,255,255,.24),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 #ffffff55,0 10px 30px #0003;backdrop-filter:blur(22px)}
+h1{letter-spacing:1.8px}
+.sub{color:#aeb8cc}
+.balance,.panel,.case,.case-modal,.item,.stat,.case-card,.result{background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 14px 34px rgba(0,0,0,.18);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.balance{border-radius:26px;padding:20px}
+.amount{font-size:32px;text-shadow:0 0 28px #f4c45135}
+.bonus,.primary,.secondary,.sell-btn{border-radius:15px;transition:transform .18s ease,filter .18s ease}
+.bonus{background:linear-gradient(135deg,rgba(255,215,105,.24),rgba(255,184,70,.08));border:1px solid rgba(255,218,120,.35);color:#ffe7a2}
+button:active{transform:scale(.97)}
+.cases{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.case{min-height:155px;border-radius:24px;padding:17px 10px;background:linear-gradient(150deg,rgba(255,255,255,.15),rgba(255,255,255,.035));position:relative;overflow:hidden}
+.case:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.13),transparent 60%);pointer-events:none}
+.case.red,.case.dragon,.case.hydra,.case.snake{border-color:rgba(255,255,255,.17);background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.035))}
+.case-icon{font-size:42px;margin-bottom:11px;filter:drop-shadow(0 8px 12px #0004)}
+.case-name{font-size:13px;letter-spacing:.2px}
+.price{margin-top:8px;font-size:12px}
+.section-title{margin-top:24px}
+.panel{border-radius:23px;padding:16px}
+.nav{background:rgba(15,19,32,.72);border-top:1px solid rgba(255,255,255,.12);backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%)}
+.nav-inner{gap:5px}
+.nav button{border-radius:16px}
+.nav button.active{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 #ffffff25}
+.modal-backdrop{background:rgba(2,5,12,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.case-modal{border-radius:30px;background:linear-gradient(150deg,rgba(37,45,68,.94),rgba(15,20,35,.94));border-color:rgba(255,255,255,.2);box-shadow:0 28px 90px #0008}
+.modal-head{margin-bottom:18px}
+.primary{background:linear-gradient(135deg,#f8dd8c,#eeb94f);color:#171a24;font-weight:900;box-shadow:0 8px 24px #e9b94b28}
+.secondary{background:rgba(255,255,255,.09);color:var(--text);border:1px solid rgba(255,255,255,.15)}
+.reel-wrap{border-radius:21px;border:1px solid rgba(255,255,255,.17);background:rgba(0,0,0,.2)}
+.reel-card{border-radius:17px;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045));border-color:rgba(255,255,255,.16)}
+.reel-card .emoji{font-size:30px}
+.case-card{border-radius:18px;padding:11px}
+.case-card-icon{font-size:29px}
+.case-card-chance{color:#dbe5ff}
+.item{border-radius:19px;padding:12px}
+.item-emoji{border-radius:15px;background:rgba(255,255,255,.1)} .item-emoji img{width:44px;height:44px;object-fit:contain;display:block;border-radius:10px}
+.stat{border-radius:18px}
+.result{border-radius:23px}
+input,button{ -webkit-tap-highlight-color:transparent}
+@media(min-width:430px){.case{min-height:170px}}
+
+
+.case-card-icon img,.reel-card .emoji img{width:54px;height:54px;object-fit:contain;display:block;margin:0 auto;filter:drop-shadow(0 8px 12px #0005)}
+.reel-card .emoji img{width:48px;height:48px}
+.case-card-icon img{width:50px;height:50px}
+.case-icon.case-art{position:relative}
+
+
+.open-options{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 12px;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.055)}
+.open-options label{font-size:12px;color:var(--muted);font-weight:750}
+.open-options select{background:#20283a;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:7px 10px;font:inherit}
+.fast-option{display:flex;align-items:center;gap:6px;margin-left:auto}
+.fast-option input{accent-color:#f4c451;width:16px;height:16px}
+.case.farmbear{border-color:rgba(255,202,111,.4);background:linear-gradient(150deg,rgba(255,190,92,.19),rgba(255,255,255,.035))}
+.case.farmbear .case-icon{filter:drop-shadow(0 0 16px #ffce7338)}
+.case-icon{font-size:44px}
+.case-card-icon img,.reel-card .emoji img{background:rgba(255,255,255,.06);border-radius:12px}
+
+.multi-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.multi-results .case-card-icon img{width:38px;height:38px}.multi-reels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
+.multi-reel-lane{position:relative;overflow:hidden;min-width:0;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:rgba(0,0,0,.18);padding:9px 0}
+.multi-reel-lane .reel-pointer{left:50%;transform:translateX(-50%);height:100%;width:2px;background:linear-gradient(transparent,#f7d77b,transparent);z-index:2;pointer-events:none}
+.multi-reel-lane .reel{display:flex;gap:7px;width:max-content;will-change:transform}
+.multi-reel-lane .reel-card{width:82px;min-width:82px;padding:8px 4px;font-size:10px}
+.multi-reel-lane .reel-card .emoji img{width:38px;height:38px}
+.multi-reel-lane .reel-card .emoji{font-size:25px}
+.multi-reel-lane .reel-card div:last-child{overflow-wrap:anywhere}
+@media(max-width:360px){.multi-reels{grid-template-columns:1fr}.multi-reel-lane .reel-card{width:74px;min-width:74px}}
+
+/* Локальные мультяшные подарки — работают офлайн, без внешних изображений */
+.cartoon-gift{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;max-width:100%;border-radius:16px;background:radial-gradient(circle at 30% 20%,#ffffff55,transparent 42%),linear-gradient(145deg,#172c52,#0a1327);border:1px solid #ffffff22;box-shadow:inset 0 1px 0 #ffffff25,0 5px 14px #0005;vertical-align:middle;}
+.cartoon-gift span{font-size:34px;line-height:1;filter:drop-shadow(0 3px 2px #0007);}
+.cartoon-gift.bear{background:linear-gradient(145deg,#76503d,#261c22);}.cartoon-gift.rose{background:linear-gradient(145deg,#8b244f,#28152e);}.cartoon-gift.bouquet{background:linear-gradient(145deg,#82406d,#17284a);}.cartoon-gift.ring{background:linear-gradient(145deg,#225b83,#17203d);}.cartoon-gift.mood{background:linear-gradient(145deg,#5e3a9e,#173b66);}.cartoon-gift.liberty{background:linear-gradient(145deg,#4d8cbb,#27315b);}.cartoon-gift.star{background:linear-gradient(145deg,#9c7528,#382744);}
+.item-emoji .cartoon-gift{width:44px;height:44px;border-radius:12px}.item-emoji .cartoon-gift span{font-size:28px}
+.case-card-icon .cartoon-gift{width:50px;height:50px}.reel-card .cartoon-gift{width:48px;height:48px}.multi-results .case-card-icon .cartoon-gift{width:38px;height:38px}.multi-results .case-card-icon .cartoon-gift span{font-size:25px}.multi-reel-lane .reel-card .cartoon-gift{width:38px;height:38px}.multi-reel-lane .reel-card .cartoon-gift span{font-size:25px}
 </style>
 </head>
 <body>
 <main class="app">
-<header><div class="logo">📦</div><div><h1>CASE WORLD</h1><div class="sub">ОТКРЫВАЙ · СОБИРАЙ · ПОБЕЖДАЙ</div></div></header>
+<header><div class="logo">💎</div><div><h1>CASE WORLD</h1><div class="sub">ОТКРЫВАЙ · СОБИРАЙ · ПОБЕЖДАЙ</div></div></header>
 <section id="page-home" class="page active">
 <div class="balance"><div><div class="eyebrow">ТВОЙ БАЛАНС</div><div class="amount">⭐ <span id="balance">500</span></div><div class="sub">Фейковые звёзды</div></div><button class="bonus" id="bonusBtn">🎁 Бонус +100</button></div>
-<div class="section-title"><h2>Выбирай кейс</h2><span class="hint">4 кейса</span></div>
+<div class="section-title"><h2>Выбирай кейс</h2><span class="hint">5 кейсов</span></div>
 <div class="cases">
-<button class="case red" data-case="ordinary"><span class="case-icon">🎁</span><span class="case-name">Обычный</span><span class="price">Бесплатный</span></button>
-<button class="case dragon" data-case="dragon"><span class="case-icon">🐲</span><span class="case-name">Драконий</span><span class="price">15 ⭐</span></button>
-<button class="case hydra" data-case="hydra"><span class="case-icon">🐉</span><span class="case-name">Гидры</span><span class="price">50 ⭐</span></button>
-<button class="case snake" data-case="snake"><span class="case-icon">🐍</span><span class="case-name">Змеиный</span><span class="price">100 ⭐</span></button>
+<button class="case red" data-case="ordinary"><span class="case-icon case-art">🪄</span><span class="case-name">Обычный</span><span class="price">Бесплатный</span></button>
+<button class="case dragon" data-case="dragon"><span class="case-icon case-art">🔥</span><span class="case-name">Драконий</span><span class="price">15 ⭐</span></button>
+<button class="case hydra" data-case="hydra"><span class="case-icon case-art">💠</span><span class="case-name">Гидры</span><span class="price">50 ⭐</span></button>
+<button class="case snake" data-case="snake"><span class="case-icon case-art">🌌</span><span class="case-name">Змеиный</span><span class="price">100 ⭐</span></button>
+<button class="case farmbear" data-case="farmbear"><span class="case-icon case-art">🧸</span><span class="case-name">Фарм мишки</span><span class="price">85 ⭐</span></button>
 </div>
-<div class="panel"><h2>🎯 Как это работает</h2><div class="sub" style="font-size:13px;margin-top:8px">Выбирай кейс, смотри рулетку и собирай виртуальные предметы. Все призы и звёзды существуют только внутри демо-игры. Продажа подарков начисляет только виртуальные очки, не настоящие Telegram Stars.</div></div>
-<div class="notice">Нет реальных Telegram Stars, платежей, вывода средств или выдачи настоящих Telegram Gifts/NFT. Прогресс хранится в браузере на этом устройстве.</div>
+
+
 </section>
 <section id="page-inventory" class="page"><div class="section-title"><h2>🎒 Инвентарь</h2><span class="hint" id="itemCount">0 предметов</span></div><div id="inventory" class="item-list"></div></section>
 <section id="page-history" class="page"><div class="section-title"><h2>🕘 История открытий</h2><span class="hint">Последние 30</span></div><div class="panel" id="history"></div></section>
@@ -32,20 +111,37 @@
 </main>
 <nav class="nav"><div class="nav-inner"><button class="active" data-page="home"><span class="nav-icon">🏠</span>Главная</button><button data-page="inventory"><span class="nav-icon">🎒</span>Инвентарь</button><button data-page="history"><span class="nav-icon">🕘</span>История</button><button data-page="profile"><span class="nav-icon">👤</span>Профиль</button></div></nav>
 <div id="toast" class="toast"></div>
-<div id="caseModal" class="modal-backdrop"><div class="case-modal"><div class="modal-head"><div><h2 id="modalCaseTitle">Кейс</h2><div class="sub" id="modalCasePrice"></div></div><button class="modal-close" id="closeCaseBtn">✕</button></div><button class="primary" id="openSelectedBtn">🎁 Открыть кейс</button><div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div><div class="section-title"><h2>📊 Призы и шансы выпадения</h2><span class="hint">100%</span></div><div id="caseOdds" class="case-grid"></div><div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div></div></div>
+<div id="caseModal" class="modal-backdrop"><div class="case-modal"><div class="modal-head"><div><h2 id="modalCaseTitle">Кейс</h2><div class="sub" id="modalCasePrice"></div></div><button class="modal-close" id="closeCaseBtn">✕</button></div><div class="open-options"><label for="openCount">Количество</label><select id="openCount"><option value="1">×1</option><option value="2">×2</option><option value="3">×3</option><option value="4">×4</option><option value="5">×5</option><option value="6">×6</option><option value="7">×7</option><option value="8">×8</option><option value="9">×9</option><option value="10">×10</option></select><label class="fast-option"><input id="fastSpin" type="checkbox"> Быстрая прокрутка</label></div><button class="primary" id="openSelectedBtn">✨ Открыть кейс</button><div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div><div class="section-title"><h2>📊 Призы и шансы выпадения</h2><span class="hint">100%</span></div><div id="caseOdds" class="case-grid"></div><div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div></div></div>
 <script>
 (()=> {
 const tg=window.Telegram?.WebApp;try{tg?.ready();tg?.expand();tg?.setHeaderColor('#17181d');tg?.setBackgroundColor('#17181d')}catch(e){}
 const NFT_URL='https://t.me/nft/LibertyFigure-264093';
+
+// Подарки рисуются локально: никаких внешних картинок и запросов к сайтам.
+function giftArt(name,emoji,cls=''){
+ const palette = /Мишка|Lunar Snake/i.test(name) ? 'bear' : /Роза/i.test(name) ? 'rose' : /Букет/i.test(name) ? 'bouquet' : /Кольцо/i.test(name) ? 'ring' : /Mood Pack/i.test(name) ? 'mood' : /Liberty/i.test(name) ? 'liberty' : /звёзд|stars/i.test(name) ? 'star' : 'gift';
+ return `<span class="${cls} cartoon-gift ${palette}" role="img" aria-label="${escapeHtml(name)}"><span>${emoji}</span></span>`;
+}
+
 const CASES={
 ordinary:{name:'Обычный кейс',emoji:'🎁',price:0,daily:true,prizes:[
 {name:'Ничего',emoji:'❌',kind:'none',value:0,weight:60,rarity:'common'},{name:'15 звёзд',emoji:'⭐',kind:'stars',value:15,weight:15,rarity:'common'},{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:10,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:7,rarity:'rare'},{name:'85 звёзд',emoji:'⭐',kind:'stars',value:85,weight:5,rarity:'rare'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:3,rarity:'epic'}]},
 dragon:{name:'Драконий кейс',emoji:'🐲',price:15,prizes:[
 {name:'Ничего',emoji:'❌',kind:'none',value:0,weight:30,rarity:'common'},{name:'15 звёзд',emoji:'⭐',kind:'stars',value:15,weight:25,rarity:'common'},{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:20,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:15,rarity:'rare'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:6,rarity:'epic'},{name:'Кольцо Telegram',emoji:'💍',kind:'gift',value:'Кольцо Telegram',sellValue:100,weight:4,rarity:'legendary'}]},
 hydra:{name:'Кейс Гидры',emoji:'🐉',price:50,prizes:[
-{name:'15 звёзд',emoji:'⭐',kind:'stars',value:15,weight:30,rarity:'common'},{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:25,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:15,rarity:'rare'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:13,rarity:'rare'},{name:'Роза Telegram',emoji:'🌹',kind:'gift',value:'Роза Telegram',sellValue:25,weight:7,rarity:'epic'},{name:'Букет Telegram',emoji:'💐',kind:'gift',value:'Букет Telegram',sellValue:50,weight:6,rarity:'epic'},{name:'Алмаз Telegram',emoji:'💎',kind:'gift',value:'Алмаз Telegram',sellValue:100,weight:3,rarity:'legendary'},{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,weight:1,rarity:'legendary'}]},
+{name:'15 звёзд',emoji:'⭐',kind:'stars',value:15,weight:30,rarity:'common'},{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:25,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:15,rarity:'rare'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:13,rarity:'rare'},{name:'Роза Telegram',emoji:'🌹',kind:'gift',value:'Роза Telegram',sellValue:25,weight:7,rarity:'epic'},{name:'Букет Telegram',emoji:'💐',kind:'gift',value:'Букет Telegram',sellValue:50,weight:6,rarity:'epic'},{name:'Алмаз Telegram',emoji:'💎',kind:'gift',value:'Алмаз Telegram',sellValue:100,weight:3,rarity:'legendary'},{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2000,weight:1,rarity:'legendary'}]},
 snake:{name:'Змеиный кейс',emoji:'🐍',price:100,prizes:[
-{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:30,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:25,rarity:'common'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:20,rarity:'rare'},{name:'Мишка Telegram',emoji:'🧸',kind:'gift',value:'Мишка Telegram',sellValue:15,weight:15,rarity:'epic'},{name:'Подарочная коробка Telegram',emoji:'🎁',kind:'gift',value:'Подарочная коробка Telegram',sellValue:25,weight:5,rarity:'epic'},{name:'Трофей Telegram',emoji:'🏆',kind:'gift',value:'Трофей Telegram',sellValue:100,weight:3,rarity:'legendary'},{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,weight:2,rarity:'legendary'}]}};
+{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:30,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:25,rarity:'common'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:20,rarity:'rare'},{name:'Мишка Telegram',emoji:'🧸',kind:'gift',value:'Мишка Telegram',sellValue:15,weight:15,rarity:'epic'},{name:'Подарочная коробка Telegram',emoji:'🎁',kind:'gift',value:'Подарочная коробка Telegram',sellValue:25,weight:5,rarity:'epic'},{name:'Трофей Telegram',emoji:'🏆',kind:'gift',value:'Трофей Telegram',sellValue:100,weight:3,rarity:'legendary'},{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2000,weight:2,rarity:'legendary'}]},
+farmbear:{name:'Фарм мишки',emoji:'🧸',price:85,prizes:[
+{name:'Ничего',emoji:'❌',kind:'none',value:0,weight:15,rarity:'common'},
+{name:'Мишка Telegram',emoji:'🧸',kind:'gift',value:'Мишка Telegram',sellValue:15,weight:25,rarity:'common'},
+{name:'Роза Telegram',emoji:'🌹',kind:'gift',value:'Роза Telegram',sellValue:25,weight:20,rarity:'common'},
+{name:'Букет Telegram',emoji:'💐',kind:'gift',value:'Букет Telegram',sellValue:50,weight:15,rarity:'rare'},
+{name:'Кольцо Telegram',emoji:'💍',kind:'gift',value:'Кольцо Telegram',sellValue:100,weight:10,rarity:'epic'},
+{name:'NFT Lunar Snake',emoji:'🐍',kind:'nft',value:'NFT Lunar Snake',url:'https://t.me/nft/LunarSnake-83151',sellValue:1500,weight:8,rarity:'legendary'},
+{name:'NFT Mood Pack',emoji:'🎭',kind:'nft',value:'NFT Mood Pack',url:'https://t.me/nft/MoodPack-179882',sellValue:1500,weight:5,rarity:'legendary'},
+{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2000,weight:2,rarity:'legendary'}
+]}};
 const rarityNames={common:'Обычный',rare:'Редкий',epic:'Эпический',legendary:'Легендарный'};
 const giftPrices={'Роза Telegram':25,'Мишка Telegram':15,'Кольцо Telegram':100,'Букет Telegram':50,'Алмаз Telegram':100,'Подарочная коробка Telegram':25,'Трофей Telegram':100,'Роза':25,'Мишка':15,'Кольцо':100,'Букет':50,'Алмаз':100,'Подарочная коробка':25,'Трофей':100};
 const defaultState=()=>({balance:500,bonusDate:'',freeCaseDate:'',inventory:{},history:[],opened:0});
@@ -59,13 +155,13 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':
 function rank(r){return({common:1,rare:2,epic:3,legendary:4})[r]||0}
 function giftPrice(name,item){return giftPrices[name]||giftPrices[String(name).replace(' Telegram','')]||Number(item?.sellValue)||0}
 for(const [n,it] of Object.entries(state.inventory||{})){if(it&&(it.kind==='gift'||giftPrices[n]||giftPrices[String(n).replace(' Telegram','')])){it.kind='gift';it.sellValue=giftPrice(n,it)}}
-function renderInventory(){const box=$('inventory'),entries=Object.entries(state.inventory||{}).sort((a,b)=>rank(b[1].rarity)-rank(a[1].rarity));const total=entries.reduce((s,[,v])=>s+v.count,0);$('itemCount').textContent=total+' предметов';$('profileItems').textContent=total;$('nftCount').textContent=entries.filter(([k])=>k.startsWith('NFT ')).reduce((s,[,v])=>s+v.count,0);if(!entries.length){box.innerHTML='<div class="empty">🎒<br>Инвентарь пока пуст.<br>Открой первый кейс!</div>';return}box.innerHTML=entries.map(([name,it])=>{const price=it.kind==='gift'?giftPrice(name,it):0;return `<div class="item"><div class="item-emoji">${it.emoji}</div><div class="item-info"><div class="item-name">${escapeHtml(name)}</div><div class="item-meta">${it.kind==='nft'?'NFT-демо · ссылка на Telegram':it.kind==='gift'?'Виртуальный подарок · цена '+price+' ⭐':'Коллекционный предмет'}</div></div><span>×${it.count}</span>${it.kind==='gift'?`<button class="sell-btn" data-sell="${escapeHtml(name)}">Продать<br>+${price} ⭐</button>`:''}</div>`}).join('');box.querySelectorAll('[data-sell]').forEach(b=>b.addEventListener('click',()=>sellGift(b.dataset.sell)))}
-function sellGift(name){const it=state.inventory[name];if(!it||it.kind!=='gift'||it.count<1){toast('Этот подарок нельзя продать.');return}const value=giftPrice(name,it);if(!value){toast('Не найдена цена подарка.');return}it.count--;if(it.count<=0)delete state.inventory[name];state.balance+=value;state.history.unshift({caseName:'Продажа подарка',caseEmoji:it.emoji,prize:'Продан '+name+' · +'+value+' ⭐',rarity:it.rarity,time:timeNow()});state.history=state.history.slice(0,30);save();toast('Подарок продан за '+value+' виртуальных ⭐')}
+function renderInventory(){const box=$('inventory'),entries=Object.entries(state.inventory||{}).sort((a,b)=>rank(b[1].rarity)-rank(a[1].rarity));const total=entries.reduce((s,[,v])=>s+v.count,0);$('itemCount').textContent=total+' предметов';$('profileItems').textContent=total;$('nftCount').textContent=entries.filter(([k])=>k.startsWith('NFT ')).reduce((s,[,v])=>s+v.count,0);if(!entries.length){box.innerHTML='<div class="empty">🎒<br>Инвентарь пока пуст.<br>Открой первый кейс!</div>';return}box.innerHTML=entries.map(([name,it])=>{const price=it.kind==='nft'?Number(it.sellValue)||(name==='NFT Liberty Figure'?2000:1500):it.kind==='gift'?giftPrice(name,it):0;return `<div class="item"><div class="item-emoji">${giftArt(name,it.emoji)}</div><div class="item-info"><div class="item-name">${escapeHtml(name)}</div><div class="item-meta">${it.kind==='nft'?'NFT · виртуальная продажа':it.kind==='gift'?'Виртуальный подарок · цена '+price+' ⭐':'Коллекционный предмет'}</div></div><span>×${it.count}</span>${(it.kind==='gift'||it.kind==='nft')?`<button class="sell-btn" data-sell="${escapeHtml(name)}">Продать<br>+${price} ⭐</button>`:''}</div>`}).join('');box.querySelectorAll('[data-sell]').forEach(b=>b.addEventListener('click',()=>sellGift(b.dataset.sell)))}
+function sellGift(name){const it=state.inventory[name];if(!it||!['gift','nft'].includes(it.kind)||it.count<1){toast('Этот предмет нельзя продать.');return}const value=it.kind==='nft'?(Number(it.sellValue)||(name==='NFT Liberty Figure'?2000:1500)):giftPrice(name,it);if(!value){toast('Не найдена цена подарка.');return}it.count--;if(it.count<=0)delete state.inventory[name];state.balance+=value;state.history.unshift({caseName:it?.kind==='nft'?'Продажа NFT':'Продажа подарка',caseEmoji:it.emoji,prize:'Продан '+name+' · +'+value+' ⭐',rarity:it.rarity,time:timeNow()});state.history=state.history.slice(0,30);save();toast('Подарок продан за '+value+' виртуальных ⭐')}
 function timeNow(){return new Date().toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}
 function renderHistory(){const box=$('history');if(!state.history.length){box.innerHTML='<div class="empty">🕘<br>Здесь появятся твои выигрыши.</div>';return}box.innerHTML=state.history.slice(0,30).map(h=>`<div class="history-row"><div class="item-emoji">${h.caseEmoji}</div><div class="detail"><b>${escapeHtml(h.prize)}</b><small>${escapeHtml(h.caseName)} · ${escapeHtml(h.time)}</small></div></div>`).join('')}
 function renderAll(){$('balance').textContent=state.balance;$('profileBalance').textContent=state.balance;$('openedCount').textContent=state.opened;const bonus=state.bonusDate===todayKey();$('bonusBtn').textContent=bonus?'✅ Бонус получен':'🎁 Бонус +100';$('bonusBtn').disabled=bonus;$('bonusBtn').style.opacity=bonus?'.65':'1';const free=document.querySelector('[data-case="ordinary"]');if(free){const used=state.freeCaseDate===todayKey();free.querySelector('.price').textContent=used?'Уже открыт сегодня':'Бесплатный';free.disabled=used;free.style.opacity=used?'.65':'1'}const u=tg?.initDataUnsafe?.user;if(u){$('playerName').textContent=[u.first_name,u.last_name].filter(Boolean).join(' ')||'Игрок';$('playerId').textContent='Telegram ID: '+u.id+(u.username?' · @'+u.username:'')}renderInventory();renderHistory()}
 function pick(prizes){const total=prizes.reduce((s,p)=>s+p.weight,0);let n=Math.random()*total;for(const p of prizes){n-=p.weight;if(n<0)return p}return prizes[prizes.length-1]}
-function renderOdds(id){const c=CASES[id];$('caseOdds').innerHTML=c.prizes.map(p=>`<div class="case-card"><div class="case-card-icon">${p.emoji}</div><div class="case-card-main"><div class="case-card-title">${escapeHtml(p.name)}</div><div class="case-card-price">${p.kind==='gift'?'Продажа за '+p.sellValue+' ⭐':p.kind==='stars'?'Выигрыш '+p.value+' ⭐':p.kind==='nft'?'NFT-предмет':'Без приза'}</div><div class="case-card-chance">Шанс: ${p.weight}%</div></div></div>`).join('')}
+function renderOdds(id){const c=CASES[id];$('caseOdds').innerHTML=c.prizes.map(p=>`<div class="case-card"><div class="case-card-icon">${giftArt(p.value||p.name,p.emoji)}</div><div class="case-card-main"><div class="case-card-title">${escapeHtml(p.name)}</div><div class="case-card-price">${p.kind==='gift'?'Продажа за '+p.sellValue+' ⭐':p.kind==='stars'?'Выигрыш '+p.value+' ⭐':p.kind==='nft'?'Продажа NFT за '+(p.sellValue||1500)+' ⭐':'Без приза'}</div><div class="case-card-chance">Шанс: ${p.weight}%</div></div></div>`).join('')}
 function showCase(id){selectedCase=id;lastCase=id;const c=CASES[id];$('modalCaseTitle').textContent=c.emoji+' '+c.name;$('modalCasePrice').textContent=c.price===0?'Бесплатно · 1 раз в день':c.price+' ⭐ за открытие';$('reelWrap').classList.remove('show');$('result').classList.remove('show');$('openSelectedBtn').style.display='block';$('openSelectedBtn').disabled=false;renderOdds(id);$('caseModal').classList.add('show')}
 function showPage(name){$('caseModal').classList.remove('show');document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name))}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
@@ -73,18 +169,64 @@ document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',(
 $('bonusBtn').addEventListener('click',()=>{const t=todayKey();if(state.bonusDate===t){toast('Бонус уже получен сегодня!');return}state.bonusDate=t;state.balance+=100;save();toast('Получено +100 фейковых звёзд!')});
 $('closeCaseBtn').addEventListener('click',()=>{if(!busy)$('caseModal').classList.remove('show')});$('caseModal').addEventListener('click',e=>{if(e.target===$('caseModal')&&!busy)$('caseModal').classList.remove('show')});$('openSelectedBtn').addEventListener('click',()=>openCase(selectedCase));$('againBtn').addEventListener('click',()=>{if($('againBtn').disabled)return;$('result').classList.remove('show');$('reelWrap').classList.remove('show');$('openSelectedBtn').style.display='block';openCase(lastCase)});
 $('resetBtn').addEventListener('click',()=>{if(confirm('Точно сбросить весь демо-прогресс на этом устройстве?')){state=defaultState();save();showPage('home');toast('Демо-прогресс сброшен')}});
-async function openCase(id){if(busy)return;const c=CASES[id];if(!c)return;lastCase=id;const today=todayKey();if(c.daily&&state.freeCaseDate===today){toast('Бесплатный обычный кейс уже получен сегодня!');return}if(state.balance<c.price){toast('Не хватает фейковых звёзд! Забери ежедневный бонус +100.');return}busy=true;$('openSelectedBtn').disabled=true;$('openSelectedBtn').style.display='none';state.balance-=c.price;if(c.daily)state.freeCaseDate=today;save();$('result').classList.remove('show');$('reelWrap').classList.add('show');
-const reel=$('reel');reel.style.transition='none';reel.style.transform='translateX(0)';const winner=pick(c.prizes);
-// Длинная лента: победный приз находится далеко справа, а не на самом первом экране.
-const winnerIndex=44;const sequence=Array.from({length:64},(_,i)=>i===winnerIndex?winner:c.prizes[Math.floor(Math.random()*c.prizes.length)]);
-reel.innerHTML=sequence.map(p=>`<div class="reel-card ${p.rarity}"><div class="emoji">${p.emoji}</div><div>${escapeHtml(p.name)}</div></div>`).join('');
+async function openCase(id){
+if(busy)return;
+const c=CASES[id];if(!c)return;
+lastCase=id;const today=todayKey();
+if(c.daily&&state.freeCaseDate===today){toast('Бесплатный обычный кейс уже получен сегодня!');return}
+const count=Math.max(1,Math.min(10,Number($('openCount')?.value||1)));
+if(c.daily&&count>1){toast('Бесплатный кейс можно открыть только 1 раз в день.');return}
+const totalCost=c.price*count;
+if(state.balance<totalCost){toast('Не хватает звёзд на '+count+' открытий!');return}
+const fast=!!$('fastSpin')?.checked;
+busy=true;$('openSelectedBtn').disabled=true;$('openSelectedBtn').style.display='none';
+$('openCount').disabled=true;$('fastSpin').disabled=true;
+$('result').classList.remove('show');
+const wrap=$('reelWrap');wrap.classList.add('show');
+const winners=Array.from({length:count},()=>pick(c.prizes));
+state.balance-=totalCost;if(c.daily)state.freeCaseDate=today;save();
+wrap.innerHTML='<div class="multi-reels" style="grid-template-columns:repeat('+ (count===1 ? 1 : 2) +',minmax(0,1fr))">'+winners.map((w,idx)=>`<div class="multi-reel-lane"><div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:7px">Кейс ${idx+1}</div><div class="reel-pointer"></div><div class="reel" id="reel-${idx}"></div></div>`).join('')+'</div>';
 await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-const target=reel.children[winnerIndex];const wrap=$('reelWrap');const targetCenter=target.offsetLeft+target.offsetWidth/2;const viewportCenter=wrap.clientWidth/2;const maxX=Math.max(0,reel.scrollWidth-wrap.clientWidth);const targetX=Math.min(maxX,Math.max(0,targetCenter-viewportCenter));
-reel.style.transition='transform 4.8s cubic-bezier(.08,.72,.12,1)';reel.style.transform=`translateX(${-targetX}px)`;
-await new Promise(r=>setTimeout(r,4950));
-if(winner.kind==='stars')state.balance+=winner.value;else if(winner.kind==='gift'||winner.kind==='nft'){const name=winner.value;if(!state.inventory[name])state.inventory[name]={count:0,emoji:winner.emoji,rarity:winner.rarity,kind:winner.kind,url:winner.url||'',sellValue:winner.sellValue||0};state.inventory[name].count++;if(winner.sellValue)state.inventory[name].sellValue=winner.sellValue;if(rank(winner.rarity)>rank(state.inventory[name].rarity))state.inventory[name].rarity=winner.rarity}
-state.opened++;state.history.unshift({caseName:c.name,caseEmoji:c.emoji,prize:winner.name,rarity:winner.rarity,time:timeNow()});state.history=state.history.slice(0,30);save();$('resultEmoji').textContent=winner.emoji;$('resultTitle').textContent=winner.name;if(winner.url){$('resultTitle').innerHTML=`<a href="${winner.url}" target="_blank" rel="noopener" style="color:inherit">${escapeHtml(winner.name)} ↗</a>`}
-$('resultSub').textContent=(winner.kind==='none'?'В этот раз без приза':winner.kind==='nft'?'Коллекционный NFT · '+winner.weight+'%':'Шанс выпадения: '+winner.weight+'%')+' · Баланс: '+state.balance+' ⭐';$('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Открыть ещё';$('againBtn').disabled=!!(c.daily&&state.freeCaseDate===today);$('againBtn').style.opacity=$('againBtn').disabled?'.6':'1';$('result').classList.add('show');$('openSelectedBtn').style.display='none';busy=false;try{tg?.HapticFeedback?.notificationOccurred('success')}catch(e){}}
+const duration=fast?420:4800;
+const animationPromises=winners.map((winner,idx)=>new Promise(async resolve=>{
+ const reel=$('reel-'+idx);const winnerIndex=44;
+ const sequence=Array.from({length:64},(_,i)=>i===winnerIndex?winner:c.prizes[Math.floor(Math.random()*c.prizes.length)]);
+ reel.innerHTML=sequence.map(p=>`<div class="reel-card ${p.rarity}"><div class="emoji">${giftArt(p.value||p.name,p.emoji)}</div><div>${escapeHtml(p.name)}</div></div>`).join('');
+ reel.style.transition='none';reel.style.transform='translateX(0)';
+ await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+ const target=reel.children[winnerIndex],lane=reel.parentElement;
+ const targetCenter=target.offsetLeft+target.offsetWidth/2,viewportCenter=lane.clientWidth/2;
+ const maxX=Math.max(0,reel.scrollWidth-lane.clientWidth);
+ const targetX=Math.min(maxX,Math.max(0,targetCenter-viewportCenter));
+ reel.style.transition=`transform ${duration}ms ${fast?'cubic-bezier(.2,.7,.2,1)':'cubic-bezier(.08,.72,.12,1)'}`;
+ reel.style.transform=`translateX(${-targetX}px)`;
+ setTimeout(resolve,duration+60);
+}));
+await Promise.all(animationPromises);
+for(const winner of winners){
+ if(winner.kind==='stars')state.balance+=winner.value;
+ else if(winner.kind==='gift'||winner.kind==='nft'){
+  const name=winner.value;
+  if(!state.inventory[name])state.inventory[name]={count:0,emoji:winner.emoji,rarity:winner.rarity,kind:winner.kind,url:winner.url||'',sellValue:winner.sellValue||0};
+  state.inventory[name].count++;if(winner.sellValue)state.inventory[name].sellValue=winner.sellValue;
+  if(rank(winner.rarity)>rank(state.inventory[name].rarity))state.inventory[name].rarity=winner.rarity;
+ }
+ state.opened++;state.history.unshift({caseName:c.name,caseEmoji:c.emoji,prize:winner.name,rarity:winner.rarity,time:timeNow()});
+}
+state.history=state.history.slice(0,30);save();renderAll();
+if(count===1){
+ const w=winners[0];$('resultEmoji').textContent=w.emoji;$('resultTitle').textContent=w.name;
+ if(w.url)$('resultTitle').innerHTML=`<a href="${w.url}" target="_blank" rel="noopener" style="color:inherit">${escapeHtml(w.name)} ↗</a>`;
+ $('resultSub').textContent=(w.kind==='none'?'В этот раз без приза':w.kind==='nft'?'NFT · продажа '+(w.sellValue||1500)+' ⭐':w.kind==='gift'?'Подарок · шанс '+w.weight+'%':'Шанс выпадения: '+w.weight+'%')+' · Баланс: '+state.balance+' ⭐';
+}else{
+ $('resultEmoji').textContent='🎉';$('resultTitle').textContent='Открыто кейсов: '+count;
+ $('resultSub').innerHTML='<div class="multi-results">'+winners.map(w=>`<div class="case-card"><div class="case-card-icon">${giftArt(w.value||w.name,w.emoji)}</div><div class="case-card-main"><div class="case-card-title">${escapeHtml(w.name)}</div><div class="case-card-price">${w.kind==='nft'?'Продажа '+(w.sellValue||1500)+' ⭐':w.kind==='none'?'Без приза':w.kind==='gift'?'Подарок':'Выигрыш '+w.value+' ⭐'}</div></div></div>`).join('')+'</div><div style="margin-top:10px">Баланс: '+state.balance+' ⭐</div>';
+}
+$('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Открыть ещё';
+$('againBtn').disabled=!!(c.daily&&state.freeCaseDate===todayKey());$('againBtn').style.opacity=$('againBtn').disabled?'.6':'1';
+$('result').classList.add('show');$('openCount').disabled=false;$('fastSpin').disabled=false;busy=false;
+try{tg?.HapticFeedback?.notificationOccurred('success')}catch(e){}
+}
 renderAll();
 })();
 </script>
