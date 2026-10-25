@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#17181d">
+<meta name="theme-color" content="#55585d">
 <title>CASE WORLD</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
@@ -87,6 +87,86 @@ input,button{ -webkit-tap-highlight-color:transparent}
 .cartoon-gift.bear{background:linear-gradient(145deg,#76503d,#261c22);}.cartoon-gift.rose{background:linear-gradient(145deg,#8b244f,#28152e);}.cartoon-gift.bouquet{background:linear-gradient(145deg,#82406d,#17284a);}.cartoon-gift.ring{background:linear-gradient(145deg,#225b83,#17203d);}.cartoon-gift.mood{background:linear-gradient(145deg,#5e3a9e,#173b66);}.cartoon-gift.liberty{background:linear-gradient(145deg,#4d8cbb,#27315b);}.cartoon-gift.star{background:linear-gradient(145deg,#9c7528,#382744);}
 .item-emoji .cartoon-gift{width:44px;height:44px;border-radius:12px}.item-emoji .cartoon-gift span{font-size:28px}
 .case-card-icon .cartoon-gift{width:50px;height:50px}.reel-card .cartoon-gift{width:48px;height:48px}.multi-results .case-card-icon .cartoon-gift{width:38px;height:38px}.multi-results .case-card-icon .cartoon-gift span{font-size:25px}.multi-reel-lane .reel-card .cartoon-gift{width:38px;height:38px}.multi-reel-lane .reel-card .cartoon-gift span{font-size:25px}
+
+/* EXTRA LIQUID GLASS — stronger glassmorphism */
+body:before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 18% 18%,rgba(91,151,255,.24),transparent 30%),radial-gradient(ellipse at 78% 35%,rgba(191,105,255,.2),transparent 32%),radial-gradient(ellipse at 48% 88%,rgba(73,226,214,.12),transparent 30%);filter:blur(24px);animation:glassGlow 14s ease-in-out infinite alternate}
+@keyframes glassGlow{from{transform:translate3d(-1%,0,0) scale(1)}to{transform:translate3d(1%,-1%,0) scale(1.05)}}
+.balance,.panel,.case,.case-modal,.item,.stat,.case-card,.result,.history-row,.reel-wrap,.multi-reel-lane,.open-options{backdrop-filter:blur(32px) saturate(175%);-webkit-backdrop-filter:blur(32px) saturate(175%);box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 -1px 0 rgba(255,255,255,.035),0 18px 42px rgba(0,0,0,.24)}
+.panel{background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.035));border-color:rgba(255,255,255,.19);border-radius:22px;position:relative;overflow:hidden}
+.panel:before,.balance:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(125deg,rgba(255,255,255,.10),transparent 34%,transparent 70%,rgba(255,255,255,.035))}
+.balance{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.19),rgba(255,255,255,.045));border-color:rgba(255,255,255,.24);border-radius:25px}
+.case{border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.23),0 15px 32px rgba(0,0,0,.2);transition:transform .2s,border-color .2s,box-shadow .2s}
+.case:active{transform:scale(.97)}
+.logo,.bonus,.demo,.primary,.secondary,.nav button,.sell-btn{backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}
+input#promoInput{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.22)!important;box-shadow:inset 0 1px 5px rgba(0,0,0,.12),0 8px 20px rgba(0,0,0,.08)}
+input#promoInput:focus{outline:none;border-color:rgba(247,215,123,.7)!important;box-shadow:0 0 0 3px rgba(247,215,123,.12),inset 0 1px 5px rgba(0,0,0,.12)}
+.nav{background:rgba(13,18,32,.62);border-top-color:rgba(255,255,255,.17);box-shadow:0 -12px 38px rgba(0,0,0,.16)}
+.case-modal{background:linear-gradient(145deg,rgba(35,46,72,.86),rgba(10,15,28,.86));backdrop-filter:blur(36px) saturate(180%);-webkit-backdrop-filter:blur(36px) saturate(180%)}
+@media(prefers-reduced-motion:reduce){body:before{animation:none}.case{transition:none}}
+
+
+/* MONOCHROME LIQUID GLASS — silver / graphite theme */
+:root{color-scheme:dark;--bg:#85878b;--panel:rgba(238,240,243,.10);--muted:#c9cbd0;--text:#f8f9fb;--gold:#e3e5e8;--line:rgba(255,255,255,.28)}
+html{background:#77797d}
+body{background:radial-gradient(ellipse at 18% 0%,rgba(255,255,255,.25),transparent 34%),radial-gradient(ellipse at 88% 25%,rgba(205,209,215,.22),transparent 36%),linear-gradient(145deg,#777a7f 0%,#55585d 45%,#34373c 100%);background-attachment:fixed}
+body:before{background:radial-gradient(ellipse at 12% 18%,rgba(255,255,255,.23),transparent 32%),radial-gradient(ellipse at 80% 28%,rgba(202,207,214,.2),transparent 33%),radial-gradient(ellipse at 48% 88%,rgba(236,238,242,.12),transparent 32%);filter:blur(34px);animation:glassGlow 18s ease-in-out infinite alternate}
+:root{--gold:#f1f2f4}
+header .logo,.logo{background:linear-gradient(145deg,rgba(255,255,255,.42),rgba(220,223,228,.08));border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 1px 1px rgba(255,255,255,.7),inset 0 -1px 0 rgba(255,255,255,.12),0 12px 34px rgba(0,0,0,.18);backdrop-filter:blur(32px) saturate(130%);-webkit-backdrop-filter:blur(32px) saturate(130%)}
+.balance,.panel,.case,.case-modal,.item,.stat,.case-card,.result,.history-row,.reel-wrap,.multi-reel-lane,.open-options{background:linear-gradient(135deg,rgba(255,255,255,.24) 0%,rgba(255,255,255,.085) 38%,rgba(210,214,220,.045) 100%);border:1px solid rgba(255,255,255,.30);backdrop-filter:blur(38px) saturate(125%);-webkit-backdrop-filter:blur(38px) saturate(125%);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.08),0 20px 48px rgba(0,0,0,.22)}
+.balance{background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.075));border-color:rgba(255,255,255,.43)}
+.panel{position:relative;overflow:hidden;border-radius:25px}
+.panel:after,.case:after,.case-card:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(118deg,rgba(255,255,255,.18),transparent 24%,transparent 72%,rgba(255,255,255,.055));}
+.case{background:linear-gradient(145deg,rgba(255,255,255,.28),rgba(255,255,255,.07));border-radius:26px;border-color:rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.58),inset 0 -1px 0 rgba(255,255,255,.08),0 18px 36px rgba(0,0,0,.20)}
+.case.red,.case.dragon,.case.hydra,.case.snake,.case.farmbear{background:linear-gradient(145deg,rgba(255,255,255,.27),rgba(255,255,255,.065));border-color:rgba(255,255,255,.34)}
+.case:before{background:radial-gradient(ellipse at 20% 0%,rgba(255,255,255,.33),transparent 58%),linear-gradient(120deg,rgba(255,255,255,.08),transparent 42%)}
+.nav{background:rgba(80,83,88,.58);border-top:1px solid rgba(255,255,255,.35);box-shadow:0 -12px 38px rgba(0,0,0,.17);backdrop-filter:blur(42px) saturate(130%);-webkit-backdrop-filter:blur(42px) saturate(130%)}
+.nav button{color:#e2e4e8}.nav button.active{color:#fff;background:rgba(255,255,255,.20);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.case-modal{background:linear-gradient(145deg,rgba(155,159,165,.90),rgba(65,68,73,.88));border-color:rgba(255,255,255,.4);backdrop-filter:blur(44px) saturate(130%);-webkit-backdrop-filter:blur(44px) saturate(130%)}
+.modal-backdrop{background:rgba(22,24,27,.48);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.reel-card{background:linear-gradient(145deg,rgba(255,255,255,.25),rgba(255,255,255,.07));border-color:rgba(255,255,255,.27);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.primary{background:linear-gradient(135deg,#f4f5f6,#bfc3c8);color:#27292d;border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 0 #fff,0 8px 25px rgba(0,0,0,.15)}
+.secondary,.modal-close,.sell-btn{background:rgba(255,255,255,.13);color:#fff;border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+.bonus,.demo{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.32)}
+.amount,.price,.result-title,.case-card-chance,.sell-btn{color:#f5f6f8}
+.eyebrow,.sub,.hint,.notice,.item-meta,.case-card-price{color:#d6d8dc}
+input#promoInput,.open-options select{background:rgba(255,255,255,.14)!important;color:#fff;border-color:rgba(255,255,255,.35)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+input#promoInput::placeholder{color:rgba(255,255,255,.7)}
+.toast{background:rgba(239,241,244,.92);color:#292b30;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6)}
+@media(prefers-reduced-motion:reduce){body:before{animation:none}}
+
+
+/* FINAL DARK GRAPHITE LIQUID GLASS */
+:root{--bg:#111214;--panel:rgba(255,255,255,.055);--muted:#b4b7bd;--text:#f5f6f8;--gold:#e5e7eb;--line:rgba(255,255,255,.2)}
+html{background:#101113}
+body{background:radial-gradient(ellipse at 18% 0%,rgba(190,195,202,.13),transparent 36%),radial-gradient(ellipse at 88% 25%,rgba(135,140,148,.10),transparent 38%),linear-gradient(145deg,#202226 0%,#111214 48%,#08090a 100%);background-attachment:fixed;color:var(--text)}
+body:before{background:radial-gradient(ellipse at 12% 18%,rgba(255,255,255,.12),transparent 32%),radial-gradient(ellipse at 80% 28%,rgba(180,185,192,.11),transparent 33%),radial-gradient(ellipse at 48% 88%,rgba(220,223,228,.06),transparent 32%);filter:blur(42px);animation:glassGlow 18s ease-in-out infinite alternate}
+.app{isolation:isolate}
+header .logo,.logo{border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.3);box-shadow:inset 0 1px 1px rgba(255,255,255,.38),inset 0 -1px 0 rgba(255,255,255,.06),0 14px 32px rgba(0,0,0,.35);backdrop-filter:blur(38px) saturate(115%);-webkit-backdrop-filter:blur(38px) saturate(115%)}
+.balance,.panel,.case,.case-modal,.item,.stat,.case-card,.result,.history-row,.reel-wrap,.multi-reel-lane,.open-options{background:linear-gradient(135deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.045) 42%,rgba(200,204,210,.018) 100%);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(42px) saturate(115%);-webkit-backdrop-filter:blur(42px) saturate(115%);box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.045),0 22px 48px rgba(0,0,0,.34);border-radius:26px}
+.balance{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.19),rgba(255,255,255,.035));border-color:rgba(255,255,255,.32);border-radius:30px}
+.panel{position:relative;overflow:hidden;border-radius:28px}
+.panel:before,.balance:before,.case:after,.case-card:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(125deg,rgba(255,255,255,.13),transparent 27%,transparent 70%,rgba(255,255,255,.025))}
+.case{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.025));border-color:rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(255,255,255,.04),0 20px 38px rgba(0,0,0,.34);transition:transform .2s,border-color .2s}
+.case.red,.case.dragon,.case.hydra,.case.snake,.case.farmbear{background:linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.025));border-color:rgba(255,255,255,.25)}
+.case:before{background:radial-gradient(ellipse at 18% 0%,rgba(255,255,255,.24),transparent 58%),linear-gradient(120deg,rgba(255,255,255,.045),transparent 42%)}
+.case-card{position:relative;overflow:hidden;border-radius:22px}
+.item,.stat,.result,.history-row,.reel-wrap,.multi-reel-lane,.open-options{border-radius:22px}
+.nav{background:rgba(17,18,20,.62);border-top:1px solid rgba(255,255,255,.23);box-shadow:0 -15px 40px rgba(0,0,0,.34);backdrop-filter:blur(48px) saturate(120%);-webkit-backdrop-filter:blur(48px) saturate(120%)}
+.nav button{border-radius:22px;color:#c9cbd0}
+.nav button.active{color:#fff;background:linear-gradient(145deg,rgba(255,255,255,.2),rgba(255,255,255,.055));border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 24px rgba(0,0,0,.24)}
+.case-modal{background:linear-gradient(145deg,rgba(57,59,64,.92),rgba(18,19,22,.91));border-color:rgba(255,255,255,.32);border-radius:34px;backdrop-filter:blur(50px) saturate(120%);-webkit-backdrop-filter:blur(50px) saturate(120%);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 28px 90px #0009}
+.modal-backdrop{background:rgba(0,0,0,.62);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.reel-card{border-radius:21px;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.035));border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 10px 24px #0003}
+.primary{background:linear-gradient(135deg,#f1f2f4,#aeb2b8);color:#1b1c1f;border:1px solid rgba(255,255,255,.55);border-radius:19px;box-shadow:inset 0 1px 0 #fff,0 10px 28px #0004}
+.secondary,.modal-close,.sell-btn,.bonus,.demo{background:rgba(255,255,255,.085);color:#f4f5f7;border:1px solid rgba(255,255,255,.24);border-radius:17px;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.amount,.price,.result-title,.case-card-chance,.sell-btn{color:#f1f2f4}
+.eyebrow,.sub,.hint,.notice,.item-meta,.case-card-price{color:#c0c3c9}
+input#promoInput,.open-options select{background:rgba(255,255,255,.075)!important;color:#fff;border:1px solid rgba(255,255,255,.26)!important;border-radius:17px;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+input#promoInput::placeholder{color:rgba(255,255,255,.55)}
+.toast{background:rgba(42,43,47,.92);color:#f4f5f7;border:1px solid rgba(255,255,255,.3);border-radius:18px;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
+button{border-radius:18px}
+@media(prefers-reduced-motion:reduce){body:before{animation:none}.case{transition:none}}
+
 </style>
 </head>
 <body>
@@ -171,7 +251,9 @@ $('bonusBtn').addEventListener('click',()=>{const t=todayKey();if(state.bonusDat
 const PROMO_CODES={
   'START100':{reward:100,description:'Стартовый бонус'},
   'BEAR50':{reward:50,description:'Бонус для любителей мишек'},
-  'CASE2026':{reward:200,description:'Бонус CASE WORLD'}
+  'CASE2026':{reward:200,description:'Бонус CASE WORLD'},
+  'GLASS5000':{reward:5000,description:'Большой стеклянный бонус'},
+  'GLASS10000':{reward:10000,description:'Мега стеклянный бонус'}
 };
 $('promoBtn').addEventListener('click',()=>{
   const input=$('promoInput');
@@ -240,7 +322,7 @@ if(count===1){
  if(w.url)$('resultTitle').innerHTML=`<a href="${w.url}" target="_blank" rel="noopener" style="color:inherit">${escapeHtml(w.name)} ↗</a>`;
  $('resultSub').textContent=(w.kind==='none'?'В этот раз без приза':w.kind==='nft'?'NFT · продажа '+(w.sellValue||1500)+' ⭐':w.kind==='gift'?'Подарок · шанс '+w.weight+'%':'Шанс выпадения: '+w.weight+'%')+' · Баланс: '+state.balance+' ⭐';
 }else{
- $('resultEmoji').textContent='🎉';$('resuфltTitle').textContent='Открыто кейсов: '+count;
+ $('resultEmoji').textContent='🎉';$('resultTitle').textContent='Открыто кейсов: '+count;
  $('resultSub').innerHTML='<div class="multi-results">'+winners.map(w=>`<div class="case-card"><div class="case-card-icon">${giftArt(w.value||w.name,w.emoji)}</div><div class="case-card-main"><div class="case-card-title">${escapeHtml(w.name)}</div><div class="case-card-price">${w.kind==='nft'?'Продажа '+(w.sellValue||1500)+' ⭐':w.kind==='none'?'Без приза':w.kind==='gift'?'Подарок':'Выигрыш '+w.value+' ⭐'}</div></div></div>`).join('')+'</div><div style="margin-top:10px">Баланс: '+state.balance+' ⭐</div>';
 }
 $('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Open Case World';
