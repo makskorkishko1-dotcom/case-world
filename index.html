@@ -100,18 +100,18 @@ input,button{ -webkit-tap-highlight-color:transparent}
 <button class="case dragon" data-case="dragon"><span class="case-icon case-art">🔥</span><span class="case-name">Драконий</span><span class="price">15 ⭐</span></button>
 <button class="case hydra" data-case="hydra"><span class="case-icon case-art">💠</span><span class="case-name">Гидры</span><span class="price">50 ⭐</span></button>
 <button class="case snake" data-case="snake"><span class="case-icon case-art">🌌</span><span class="case-name">Змеиный</span><span class="price">100 ⭐</span></button>
-<button class="case farmbear" data-case="farmbear"><span class="case-icon case-art">🧸</span><span class="case-name">Фарм мишки</span><span class="price">85 ⭐</span></button>
+<button class="case farmbear" data-case="farmbear"><span class="case-icon case-art">🧸</span><span class="case-name">Фарм мишки</span><span class="price">125 ⭐</span></button>
 </div>
 
 
 </section>
 <section id="page-inventory" class="page"><div class="section-title"><h2>🎒 Инвентарь</h2><span class="hint" id="itemCount">0 предметов</span></div><div id="inventory" class="item-list"></div></section>
 <section id="page-history" class="page"><div class="section-title"><h2>🕘 История открытий</h2><span class="hint">Последние 30</span></div><div class="panel" id="history"></div></section>
-<section id="page-profile" class="page"><div class="panel"><div style="display:flex;align-items:center;gap:12px"><div class="logo">👤</div><div><h2 id="playerName">Игрок CASE WORLD</h2><div class="sub" id="playerId">Профиль игрока</div></div></div><div class="stat-grid"><div class="stat"><div class="eyebrow">БАЛАНС</div><b style="color:var(--gold)">⭐ <span id="profileBalance">500</span></b></div><div class="stat"><div class="eyebrow">ОТКРЫТО КЕЙСОВ</div><b id="openedCount">0</b></div><div class="stat"><div class="eyebrow">ПРЕДМЕТОВ</div><b id="profileItems">0</b></div><div class="stat"><div class="eyebrow">NFT</div><b id="nftCount">0</b></div></div></div><div class="panel"><h2>ℹ️ О проекте</h2><p class="sub" style="font-size:13px">CASE WORLD — фанатский симулятор открытия кейсов. Звёзды — внутриигровые очки. Подарки и NFT здесь только виртуальные.</p><button class="secondary" id="resetBtn">Сбросить прогресс</button></div><div class="panel" style="text-align:center"><a href="https://t.me/case_worlbot" target="_blank" rel="noopener" style="color:var(--gold);font-weight:800;text-decoration:none">Все изменения</a></div></section>
+<section id="page-profile" class="page"><div class="panel"><div style="display:flex;align-items:center;gap:12px"><div class="logo">👤</div><div><h2 id="playerName">Игрок CASE WORLD</h2><div class="sub" id="playerId">Профиль игрока</div></div></div><div class="stat-grid"><div class="stat"><div class="eyebrow">БАЛАНС</div><b style="color:var(--gold)">⭐ <span id="profileBalance">500</span></b></div><div class="stat"><div class="eyebrow">ОТКРЫТО КЕЙСОВ</div><b id="openedCount">0</b></div><div class="stat"><div class="eyebrow">ПРЕДМЕТОВ</div><b id="profileItems">0</b></div><div class="stat"><div class="eyebrow">NFT</div><b id="nftCount">0</b></div></div></div><div class="panel"><h2>🎟️ Промокод</h2><p class="sub" style="font-size:13px;margin-bottom:10px">Введи промокод и получи бонусные виртуальные ⭐</p><div style="display:flex;gap:8px;align-items:stretch;margin-top:10px"><input id="promoInput" type="text" placeholder="Введи промокод" autocomplete="off" autocapitalize="characters" style="flex:1;min-width:0;background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;text-transform:uppercase"><button class="primary" id="promoBtn" style="width:auto;margin:0;padding:10px 13px;white-space:nowrap">Активировать</button></div><div class="sub" style="margin-top:8px">Каждый промокод можно использовать только один раз на этом устройстве.</div></div><div class="panel"><h2>ℹ️ О проекте</h2><p class="sub" style="font-size:13px">CASE WORLD — фанатский симулятор открытия кейсов. Звёзды — внутриигровые очки. Подарки и NFT здесь только виртуальные.</p><button class="secondary" id="resetBtn">Сбросить прогресс</button></div><div class="panel" style="text-align:center"><a href="https://t.me/case_worlbot" target="_blank" rel="noopener" style="color:var(--gold);font-weight:800;text-decoration:none">Все изменения</a></div></section>
 </main>
 <nav class="nav"><div class="nav-inner"><button class="active" data-page="home"><span class="nav-icon">🏠</span>Главная</button><button data-page="inventory"><span class="nav-icon">🎒</span>Инвентарь</button><button data-page="history"><span class="nav-icon">🕘</span>История</button><button data-page="profile"><span class="nav-icon">👤</span>Профиль</button></div></nav>
 <div id="toast" class="toast"></div>
-<div id="caseModal" class="modal-backdrop"><div class="case-modal"><div class="modal-head"><div><h2 id="modalCaseTitle">Кейс</h2><div class="sub" id="modalCasePrice"></div></div><button class="modal-close" id="closeCaseBtn">✕</button></div><div class="open-options"><label for="openCount">Количество</label><select id="openCount"><option value="1">×1</option><option value="2">×2</option><option value="3">×3</option><option value="4">×4</option><option value="5">×5</option><option value="6">×6</option><option value="7">×7</option><option value="8">×8</option><option value="9">×9</option><option value="10">×10</option></select><label class="fast-option"><input id="fastSpin" type="checkbox"> Быстрая прокрутка</label></div><button class="primary" id="openSelectedBtn">✨ Открыть кейс</button><div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div><div class="section-title"><h2>📊 Призы и шансы выпадения</h2><span class="hint">100%</span></div><div id="caseOdds" class="case-grid"></div><div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div></div></div>
+<div id="caseModal" class="modal-backdrop"><div class="case-modal"><div class="modal-head"><div><h2 id="modalCaseTitle">Кейс</h2><div class="sub" id="modalCasePrice"></div></div><button class="modal-close" id="closeCaseBtn">✕</button></div><div class="open-options"><label for="openCount">Количество</label><select id="openCount"><option value="1">×1</option><option value="2">×2</option><option value="3">×3</option><option value="4">×4</option><option value="5">×5</option><option value="6">×6</option><option value="7">×7</option><option value="8">×8</option><option value="9">×9</option><option value="10">×10</option></select><label class="fast-option"><input id="fastSpin" type="checkbox"> Быстрая прокрутка</label></div><button class="primary" id="openSelectedBtn">✨ Open Case World</button><div id="reelWrap" class="reel-wrap"><div class="reel-pointer"></div><div id="reel" class="reel"></div></div><div class="section-title"><h2>📊 Призы и шансы выпадения</h2><span class="hint">100%</span></div><div id="caseOdds" class="case-grid"></div><div id="result" class="result"><div class="big" id="resultEmoji">🎁</div><div class="result-title" id="resultTitle">Приз!</div><div id="resultSub"></div><button class="primary" id="againBtn">Открыть ещё</button></div></div></div>
 <script>
 (()=> {
 const tg=window.Telegram?.WebApp;try{tg?.ready();tg?.expand();tg?.setHeaderColor('#17181d');tg?.setBackgroundColor('#17181d')}catch(e){}
@@ -132,19 +132,19 @@ hydra:{name:'Кейс Гидры',emoji:'🐉',price:50,prizes:[
 {name:'15 звёзд',emoji:'⭐',kind:'stars',value:15,weight:30,rarity:'common'},{name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:25,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:15,rarity:'rare'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:13,rarity:'rare'},{name:'Роза Telegram',emoji:'🌹',kind:'gift',value:'Роза Telegram',sellValue:25,weight:7,rarity:'epic'},{name:'Букет Telegram',emoji:'💐',kind:'gift',value:'Букет Telegram',sellValue:50,weight:6,rarity:'epic'},{name:'Алмаз Telegram',emoji:'💎',kind:'gift',value:'Алмаз Telegram',sellValue:100,weight:3,rarity:'legendary'},{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2000,weight:1,rarity:'legendary'}]},
 snake:{name:'Змеиный кейс',emoji:'🐍',price:100,prizes:[
 {name:'25 звёзд',emoji:'⭐',kind:'stars',value:25,weight:30,rarity:'common'},{name:'50 звёзд',emoji:'⭐',kind:'stars',value:50,weight:25,rarity:'common'},{name:'100 звёзд',emoji:'⭐',kind:'stars',value:100,weight:20,rarity:'rare'},{name:'Мишка Telegram',emoji:'🧸',kind:'gift',value:'Мишка Telegram',sellValue:15,weight:15,rarity:'epic'},{name:'Подарочная коробка Telegram',emoji:'🎁',kind:'gift',value:'Подарочная коробка Telegram',sellValue:25,weight:5,rarity:'epic'},{name:'Трофей Telegram',emoji:'🏆',kind:'gift',value:'Трофей Telegram',sellValue:100,weight:3,rarity:'legendary'},{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2000,weight:2,rarity:'legendary'}]},
-farmbear:{name:'Фарм мишки',emoji:'🧸',price:85,prizes:[
-{name:'Ничего',emoji:'❌',kind:'none',value:0,weight:15,rarity:'common'},
-{name:'Мишка Telegram',emoji:'🧸',kind:'gift',value:'Мишка Telegram',sellValue:15,weight:25,rarity:'common'},
+farmbear:{name:'Фарм мишки',emoji:'🧸',price:125,prizes:[
+{name:'Ничего',emoji:'❌',kind:'none',value:0,weight:20,rarity:'common'},
+{name:'Мишка Telegram',emoji:'🧸',kind:'gift',value:'Мишка Telegram',sellValue:15,weight:30,rarity:'common'},
 {name:'Роза Telegram',emoji:'🌹',kind:'gift',value:'Роза Telegram',sellValue:25,weight:20,rarity:'common'},
 {name:'Букет Telegram',emoji:'💐',kind:'gift',value:'Букет Telegram',sellValue:50,weight:15,rarity:'rare'},
 {name:'Кольцо Telegram',emoji:'💍',kind:'gift',value:'Кольцо Telegram',sellValue:100,weight:10,rarity:'epic'},
-{name:'NFT Lunar Snake',emoji:'🐍',kind:'nft',value:'NFT Lunar Snake',url:'https://t.me/nft/LunarSnake-83151',sellValue:1500,weight:8,rarity:'legendary'},
-{name:'NFT Mood Pack',emoji:'🎭',kind:'nft',value:'NFT Mood Pack',url:'https://t.me/nft/MoodPack-179882',sellValue:1500,weight:5,rarity:'legendary'},
-{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2000,weight:2,rarity:'legendary'}
+{name:'NFT Lunar Snake',emoji:'🐍',kind:'nft',value:'NFT Lunar Snake',url:'https://t.me/nft/LunarSnake-83151',sellValue:500,weight:2,rarity:'legendary'},
+{name:'NFT Mood Pack',emoji:'🎭',kind:'nft',value:'NFT Mood Pack',url:'https://t.me/nft/MoodPack-179882',sellValue:700,weight:2,rarity:'legendary'},
+{name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:NFT_URL,sellValue:2500,weight:1,rarity:'legendary'}
 ]}};
 const rarityNames={common:'Обычный',rare:'Редкий',epic:'Эпический',legendary:'Легендарный'};
 const giftPrices={'Роза Telegram':25,'Мишка Telegram':15,'Кольцо Telegram':100,'Букет Telegram':50,'Алмаз Telegram':100,'Подарочная коробка Telegram':25,'Трофей Telegram':100,'Роза':25,'Мишка':15,'Кольцо':100,'Букет':50,'Алмаз':100,'Подарочная коробка':25,'Трофей':100};
-const defaultState=()=>({balance:500,bonusDate:'',freeCaseDate:'',inventory:{},history:[],opened:0});
+const defaultState=()=>({balance:500,bonusDate:'',freeCaseDate:'',inventory:{},history:[],opened:0,usedPromoCodes:[]});
 let state;try{state={...defaultState(),...JSON.parse(localStorage.getItem('caseWorldDemo')||'{}')}}catch(e){state=defaultState()}
 let busy=false,lastCase='ordinary',selectedCase='ordinary',toastTimer;
 const $=id=>document.getElementById(id);
@@ -167,6 +167,27 @@ function showPage(name){$('caseModal').classList.remove('show');document.querySe
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
 document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>showCase(b.dataset.case)));
 $('bonusBtn').addEventListener('click',()=>{const t=todayKey();if(state.bonusDate===t){toast('Бонус уже получен сегодня!');return}state.bonusDate=t;state.balance+=100;save();toast('Получено +100 фейковых звёзд!')});
+// Демо-промокоды: меняй коды и награды в этом списке.
+const PROMO_CODES={
+  'START100':{reward:100,description:'Стартовый бонус'},
+  'BEAR50':{reward:50,description:'Бонус для любителей мишек'},
+  'CASE2026':{reward:200,description:'Бонус CASE WORLD'}
+};
+$('promoBtn').addEventListener('click',()=>{
+  const input=$('promoInput');
+  const code=String(input.value||'').trim().toUpperCase();
+  if(!code){toast('Сначала введи промокод.');return}
+  if(!Object.prototype.hasOwnProperty.call(PROMO_CODES,code)){toast('Такого промокода нет.');return}
+  state.usedPromoCodes=Array.isArray(state.usedPromoCodes)?state.usedPromoCodes:[];
+  if(state.usedPromoCodes.includes(code)){toast('Этот промокод уже использован.');return}
+  const promo=PROMO_CODES[code];
+  state.usedPromoCodes.push(code);
+  state.balance+=promo.reward;
+  state.history.unshift({caseName:'Промокод',caseEmoji:'🎟️',prize:'Промокод '+code+' · +'+promo.reward+' ⭐',rarity:'rare',time:timeNow()});
+  state.history=state.history.slice(0,30);
+  save();input.value='';toast('Промокод активирован! +'+promo.reward+' ⭐');
+});
+$('promoInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('promoBtn').click()});
 $('closeCaseBtn').addEventListener('click',()=>{if(!busy)$('caseModal').classList.remove('show')});$('caseModal').addEventListener('click',e=>{if(e.target===$('caseModal')&&!busy)$('caseModal').classList.remove('show')});$('openSelectedBtn').addEventListener('click',()=>openCase(selectedCase));$('againBtn').addEventListener('click',()=>{if($('againBtn').disabled)return;$('result').classList.remove('show');$('reelWrap').classList.remove('show');$('openSelectedBtn').style.display='block';openCase(lastCase)});
 $('resetBtn').addEventListener('click',()=>{if(confirm('Точно сбросить весь демо-прогресс на этом устройстве?')){state=defaultState();save();showPage('home');toast('Демо-прогресс сброшен')}});
 async function openCase(id){
@@ -219,15 +240,16 @@ if(count===1){
  if(w.url)$('resultTitle').innerHTML=`<a href="${w.url}" target="_blank" rel="noopener" style="color:inherit">${escapeHtml(w.name)} ↗</a>`;
  $('resultSub').textContent=(w.kind==='none'?'В этот раз без приза':w.kind==='nft'?'NFT · продажа '+(w.sellValue||1500)+' ⭐':w.kind==='gift'?'Подарок · шанс '+w.weight+'%':'Шанс выпадения: '+w.weight+'%')+' · Баланс: '+state.balance+' ⭐';
 }else{
- $('resultEmoji').textContent='🎉';$('resultTitle').textContent='Открыто кейсов: '+count;
+ $('resultEmoji').textContent='🎉';$('resuфltTitle').textContent='Открыто кейсов: '+count;
  $('resultSub').innerHTML='<div class="multi-results">'+winners.map(w=>`<div class="case-card"><div class="case-card-icon">${giftArt(w.value||w.name,w.emoji)}</div><div class="case-card-main"><div class="case-card-title">${escapeHtml(w.name)}</div><div class="case-card-price">${w.kind==='nft'?'Продажа '+(w.sellValue||1500)+' ⭐':w.kind==='none'?'Без приза':w.kind==='gift'?'Подарок':'Выигрыш '+w.value+' ⭐'}</div></div></div>`).join('')+'</div><div style="margin-top:10px">Баланс: '+state.balance+' ⭐</div>';
 }
-$('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Открыть ещё';
+$('againBtn').textContent=c.daily?'Обычный кейс — завтра снова':'Open Case World';
 $('againBtn').disabled=!!(c.daily&&state.freeCaseDate===todayKey());$('againBtn').style.opacity=$('againBtn').disabled?'.6':'1';
 $('result').classList.add('show');$('openCount').disabled=false;$('fastSpin').disabled=false;busy=false;
 try{tg?.HapticFeedback?.notificationOccurred('success')}catch(e){}
 }
 renderAll();
+setTimeout(()=>toast('👋 Добро пожаловать в CASE WORLD! Выбирай кейс и удачи!'),350);
 })();
 </script>
 </body>
