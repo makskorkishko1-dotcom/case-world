@@ -360,12 +360,32 @@ document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',(
 $('bonusBtn').addEventListener('click',()=>{const t=todayKey();if(state.bonusDate===t){toast('Бонус уже получен сегодня!');return}state.bonusDate=t;state.balance+=100;save();toast('Получено +100 фейковых звёзд!')});
 // Демо-промокоды: меняй коды и награды в этом списке.
 const PROMO_CODES={
-  'START100':{reward:100,description:'Стартовый бонус'},
-  'BEAR50':{reward:50,description:'Бонус для любителей мишек'},
-  'CASE2026':{reward:200,description:'Бонус CASE WORLD'},
-  'GLASS5000':{reward:5000,description:'Большой стеклянный бонус'},
-  'GLASS10000':{reward:10000,description:'Мега стеклянный бонус'}
+  'CW5K-A7Q2':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-B9M4':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-C3X8':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-D6P1':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-E2R7':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-F8L5':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-G4N9':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-H1T6':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-J7V3':{reward:5000,description:'5000 игровых звёзд'},
+  'CW5K-K5Z2':{reward:5000,description:'5000 игровых звёзд'},
+  'NFT-RANDOM-4Q8M':{kind:'nft'},
+  'NFT-RANDOM-7P2X':{kind:'nft'},
+  'NFT-RANDOM-9L5A':{kind:'nft'},
+  'NFT-RANDOM-3D6R':{kind:'nft'},
+  'NFT-RANDOM-8K1T':{kind:'nft'},
+  'NFT-RANDOM-2V7N':{kind:'nft'},
+  'NFT-RANDOM-5H4C':{kind:'nft'},
+  'NFT-RANDOM-1W9B':{kind:'nft'},
+  'NFT-RANDOM-6F3J':{kind:'nft'},
+  'NFT-RANDOM-0M8E':{kind:'nft'}
 };
+const PROMO_NFTS=[
+ {name:'NFT Liberty Figure',emoji:'🗽',kind:'nft',value:'NFT Liberty Figure',url:'https://t.me/nft/LibertyFigure-264093',sellValue:2500,rarity:'legendary'},
+ {name:'NFT Lunar Snake',emoji:'🐍',kind:'nft',value:'NFT Lunar Snake',url:'https://t.me/nft/LunarSnake-83151',sellValue:500,rarity:'legendary'},
+ {name:'NFT Mood Pack',emoji:'🎭',kind:'nft',value:'NFT Mood Pack',url:'https://t.me/nft/MoodPack-179882',sellValue:700,rarity:'legendary'}
+];
 $('promoBtn').addEventListener('click',()=>{
   const input=$('promoInput');
   const code=String(input.value||'').trim().toUpperCase();
@@ -375,10 +395,18 @@ $('promoBtn').addEventListener('click',()=>{
   if(state.usedPromoCodes.includes(code)){toast('Этот промокод уже использован.');return}
   const promo=PROMO_CODES[code];
   state.usedPromoCodes.push(code);
-  state.balance+=promo.reward;
-  state.history.unshift({caseName:'Промокод',caseEmoji:'🎟️',prize:'Промокод '+code+' · +'+promo.reward+' ⭐',rarity:'rare',time:timeNow()});
-  state.history=state.history.slice(0,30);
-  save();input.value='';toast('Промокод активирован! +'+promo.reward+' ⭐');
+  if(promo.kind==='nft'){
+    const prize={...PROMO_NFTS[Math.floor(Math.random()*PROMO_NFTS.length)]};
+    const name=prize.name;
+    if(!state.inventory[name])state.inventory[name]={count:0,kind:'nft',emoji:prize.emoji,sellValue:prize.sellValue,rarity:'legendary',url:prize.url};
+    state.inventory[name].count++;
+    state.history.unshift({caseName:'NFT за промокод',caseEmoji:'🎟️',prize:'Промокод '+code+' · '+name,rarity:'legendary',time:timeNow()});
+    state.history=state.history.slice(0,30);save();input.value='';toast('Промокод активирован! Получен '+name);
+  }else{
+    state.balance+=promo.reward;
+    state.history.unshift({caseName:'Промокод',caseEmoji:'🎟️',prize:'Промокод '+code+' · +'+promo.reward+' ⭐',rarity:'rare',time:timeNow()});
+    state.history=state.history.slice(0,30);save();input.value='';toast('Промокод активирован! +'+promo.reward+' ⭐');
+  }
 });
 $('promoInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('promoBtn').click()});
 $('closeCaseBtn').addEventListener('click',()=>{if(!busy)$('caseModal').classList.remove('show')});$('caseModal').addEventListener('click',e=>{if(e.target===$('caseModal')&&!busy)$('caseModal').classList.remove('show')});$('openSelectedBtn').addEventListener('click',()=>openCase(selectedCase));$('againBtn').addEventListener('click',()=>{if($('againBtn').disabled)return;$('result').classList.remove('show');$('reelWrap').classList.remove('show');$('openSelectedBtn').style.display='block';openCase(lastCase)});
