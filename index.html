@@ -346,7 +346,12 @@ $('result').classList.add('show');$('openCount').disabled=false;$('fastSpin').di
 try{tg?.HapticFeedback?.notificationOccurred('success')}catch(e){}
 }
 renderAll();
-setTimeout(()=>toast('👋 Добро пожаловать в CASE WORLD! Выбирай кейс и удачи!'),350);
+if (localStorage.getItem('caseWorldWelcomeShown') !== '1') {
+  setTimeout(() => {
+    toast('👋 Добро пожаловать в CASE WORLD! Выбирай кейс и удачи!');
+    localStorage.setItem('caseWorldWelcomeShown', '1');
+  }, 350);
+}
 })();
 </script>
 </body>
